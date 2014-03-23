@@ -1,4 +1,5 @@
 #include "WinSystem.h"
+#include "D3dSystem.h"
 
 CWinSystem::CWinSystem(HINSTANCE hInst) : m_hInst(hInst),
 											t(0.0f),
@@ -56,12 +57,15 @@ void CWinSystem::WinMsg(int Frame)
 {
 	char ErrorStr[1024] ;
 
+	if( SUCCEEDED( D3dSystem.InitD3d( m_hInst, m_hWnd, m_WinWidth, m_WinHeight, ErrorStr ) ) )	// 다이렉트X 초기화 && 시스템 초기화
 	{
 		ShowWindow( m_hWnd, SW_SHOWDEFAULT );
 		UpdateWindow( m_hWnd );
 
 		MsgLoop(Frame) ;	// 메세지 루프
     }
+	else
+		MessageBox(m_hWnd, ErrorStr, "Error", MB_OK) ;
 }
 
 void CWinSystem::WinEnd()
@@ -87,10 +91,27 @@ void CWinSystem::MsgLoop(int Frame)
 
 			if(t>=(float)(1/Frame))
 			{
+				Render() ;
+
 				dwOldTime = GetTickCount() ;
 			}
 		}
 	}
+}
+
+void CWinSystem::Render()
+{
+	LPDIRECT3DDEVICE9 g_pd3dDevice ;
+	g_pd3dDevice = D3dSystem.GetDevice() ;
+
+	g_pd3dDevice->Clear( 0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0 ); // D3DCOLOR_XRGB
+	if( SUCCEEDED( g_pd3dDevice->BeginScene() ) )
+	{
+		g_pd3dDevice->EndScene();
+	}
+	g_pd3dDevice->Present( NULL, NULL, NULL, NULL );
+
+	g_pd3dDevice = NULL ;
 }
 
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

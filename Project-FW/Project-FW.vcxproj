@@ -77,10 +77,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="D3dSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="WinSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="D3dSystem.h" />
     <ClInclude Include="WinSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

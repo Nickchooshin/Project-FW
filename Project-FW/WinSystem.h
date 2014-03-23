@@ -1,5 +1,7 @@
 #pragma once
+
 #include <Windows.h>
+#include "D3dSystem.h"
 
 class CWinSystem
 {
@@ -8,6 +10,8 @@ private :
 	WNDCLASSEX m_wc ;
 	HWND m_hWnd ;
 	int m_WinWidth, m_WinHeight ;
+
+	CD3dSystem D3dSystem ;
 
 	float t ;
 	DWORD dwOldTime ;
@@ -20,6 +24,8 @@ public :
 	void WinMsg(int Frame=60) ;
 	void WinEnd() ;
 private :
+	void Render() ;
+
 	void MsgLoop(int Frame) ;
 	friend LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) ;
 } ;
