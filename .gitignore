@@ -11,3 +11,14 @@
 *.lai
 *.la
 *.a
+
+#git ignore
+/Library
+/Temp
+*.suo
+*.sln
+*.unityproj
+*.csproj
+*.pidb
+*.userprefs
+
