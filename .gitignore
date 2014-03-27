@@ -13,12 +13,7 @@
 *.a
 
 #git ignore
-/Library
-/Temp
-*.suo
-*.sln
-*.unityproj
-*.csproj
-*.pidb
-*.userprefs
-
+\ipch
+\Debug
+\Project-FW\Debug
+*.sdf
