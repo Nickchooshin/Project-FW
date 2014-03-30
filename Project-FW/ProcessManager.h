@@ -18,6 +18,8 @@ public :
 	void UpdateProcess(float dt) ;
 	void RenderProcess() ;
 
+	void DestroyProcess() ;
+
 	/* 추가 예정 */
 	//void ChangeProcess() ;
 	//void AddProcess() ;

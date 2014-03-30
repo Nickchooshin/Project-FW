@@ -13,7 +13,7 @@
 *.a
 
 #git ignore
-\ipch
-\Debug
-\Project-FW\Debug
+/ipch
+/Debug
+/Project-FW/Debug
 *.sdf
