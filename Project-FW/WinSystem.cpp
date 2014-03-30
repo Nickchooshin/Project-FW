@@ -1,5 +1,6 @@
 #include "WinSystem.h"
 #include "D3dSystem.h"
+#include "ProcessManager.h"
 
 CWinSystem::CWinSystem(HINSTANCE hInst) : m_hInst(hInst),
 											t(0.0f),
@@ -91,6 +92,7 @@ void CWinSystem::MsgLoop(int Frame)
 
 			if(t>=(float)(1/Frame))
 			{
+				Update() ;
 				Render() ;
 
 				dwOldTime = GetTickCount() ;
@@ -99,19 +101,19 @@ void CWinSystem::MsgLoop(int Frame)
 	}
 }
 
+void CWinSystem::Update()
+{
+	g_ProcessManager->UpdateProcess(t) ;
+}
+
 void CWinSystem::Render()
 {
-	LPDIRECT3DDEVICE9 g_pd3dDevice ;
-	g_pd3dDevice = D3dSystem.GetDevice() ;
-
-	g_pd3dDevice->Clear( 0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0 ); // D3DCOLOR_XRGB
-	if( SUCCEEDED( g_pd3dDevice->BeginScene() ) )
+	if( D3dSystem.BeginScene() )
 	{
-		g_pd3dDevice->EndScene();
-	}
-	g_pd3dDevice->Present( NULL, NULL, NULL, NULL );
+		g_ProcessManager->RenderProcess() ;
 
-	g_pd3dDevice = NULL ;
+		D3dSystem.EndScene() ;
+	}
 }
 
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

@@ -79,10 +79,16 @@
   <ItemGroup>
     <ClCompile Include="D3dSystem.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ProcessManager.cpp" />
+    <ClCompile Include="SampleProcess.cpp" />
     <ClCompile Include="WinSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3dSystem.h" />
+    <ClInclude Include="Process.h" />
+    <ClInclude Include="ProcessManager.h" />
+    <ClInclude Include="SampleProcess.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="WinSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

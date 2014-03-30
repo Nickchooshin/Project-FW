@@ -24,6 +24,7 @@ public :
 	void WinMsg(int Frame=60) ;
 	void WinEnd() ;
 private :
+	void Update() ;
 	void Render() ;
 
 	void MsgLoop(int Frame) ;

@@ -57,6 +57,20 @@ LPDIRECT3DDEVICE9 CD3dSystem::GetDevice()
 	return g_pd3dDevice ;
 }
 
+bool CD3dSystem::BeginScene()
+{
+	g_pd3dDevice->Clear( 0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0 ); // D3DCOLOR_XRGB
+
+	return SUCCEEDED( g_pd3dDevice->BeginScene() ) ;
+}
+
+void CD3dSystem::EndScene()
+{
+	g_pd3dDevice->EndScene();
+
+	g_pd3dDevice->Present( NULL, NULL, NULL, NULL );
+}
+
 void CD3dSystem::SetRenderState()
 {
 	g_pd3dDevice->SetRenderState( D3DRS_CULLMODE, D3DCULL_NONE );
