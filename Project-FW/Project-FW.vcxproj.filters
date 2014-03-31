@@ -7,6 +7,9 @@
     <Filter Include="Process">
       <UniqueIdentifier>{d6d01245-c34a-476b-9b37-ad2694ca19c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{87261a76-29c9-46b9-97f2-4194d02717a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinSystem.cpp">
@@ -20,6 +23,9 @@
       <Filter>Process</Filter>
     </ClCompile>
     <ClCompile Include="SampleProcess.cpp" />
+    <ClCompile Include="InputDevice.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinSystem.h">
@@ -36,5 +42,8 @@
     </ClInclude>
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SampleProcess.h" />
+    <ClInclude Include="InputDevice.h">
+      <Filter>Input</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
