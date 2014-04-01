@@ -1,5 +1,8 @@
 #include "D3dSystem.h"
 
+//
+#include "InputDevice.h"
+
 CD3dSystem::CD3dSystem()
 {
 	g_pD3d = NULL ;
@@ -48,6 +51,10 @@ HRESULT CD3dSystem::InitD3d(HINSTANCE hInst, HWND hWnd, int nWidth, int nHeight,
 	m_hInst = hInst ;
 
 	SetRenderState() ;
+
+	//
+	g_InputDevice->InitDevice(hInst, hWnd) ;
+	//
 
 	return S_OK;
 }

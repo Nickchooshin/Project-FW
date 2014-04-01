@@ -3,6 +3,8 @@
 #include "Singleton.h"
 #include <dinput.h>
 
+class Keyboard ;
+
 class InputDevice : public Singleton<InputDevice>
 {
 private :
@@ -17,6 +19,8 @@ public :
 	//void Release() ;
 
 	//virtual HRESULT Update() = 0 ;
+
+	friend Keyboard ;
 } ;
 
 #define g_InputDevice InputDevice::GetInstance()

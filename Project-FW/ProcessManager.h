@@ -14,6 +14,7 @@ public :
 	~ProcessManager() ;
 
 	void StartProcess(Process *S_Process) ;
+	void InitProcess() ;
 
 	void UpdateProcess(float dt) ;
 	void RenderProcess() ;

@@ -26,6 +26,9 @@
     <ClCompile Include="InputDevice.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinSystem.h">
@@ -43,6 +46,9 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SampleProcess.h" />
     <ClInclude Include="InputDevice.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
       <Filter>Input</Filter>
     </ClInclude>
   </ItemGroup>

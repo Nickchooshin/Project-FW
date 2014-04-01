@@ -60,6 +60,8 @@ void CWinSystem::WinMsg(int Frame)
 
 	if( SUCCEEDED( D3dSystem.InitD3d( m_hInst, m_hWnd, m_WinWidth, m_WinHeight, ErrorStr ) ) )	// 다이렉트X 초기화 && 시스템 초기화
 	{
+		g_ProcessManager->InitProcess() ;
+
 		ShowWindow( m_hWnd, SW_SHOWDEFAULT );
 		UpdateWindow( m_hWnd );
 
