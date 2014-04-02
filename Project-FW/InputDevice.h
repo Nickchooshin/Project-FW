@@ -4,6 +4,7 @@
 #include <dinput.h>
 
 class Keyboard ;
+class Mouse ;
 
 class InputDevice : public Singleton<InputDevice>
 {
@@ -21,6 +22,7 @@ public :
 	//virtual HRESULT Update() = 0 ;
 
 	friend Keyboard ;
+	friend Mouse ;
 } ;
 
 #define g_InputDevice InputDevice::GetInstance()

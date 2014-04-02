@@ -3,10 +3,12 @@
 #include "Process.h"
 
 class Keyboard ;
+class Mouse ;
 
 class SampleProcess : public Process
 {
 	Keyboard *Key ;
+	Mouse *mouse ;
 
 public :
 	static Process* process() ;

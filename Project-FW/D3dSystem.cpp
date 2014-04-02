@@ -50,11 +50,9 @@ HRESULT CD3dSystem::InitD3d(HINSTANCE hInst, HWND hWnd, int nWidth, int nHeight,
 
 	m_hInst = hInst ;
 
-	SetRenderState() ;
-
-	//
 	g_InputDevice->InitDevice(hInst, hWnd) ;
-	//
+
+	SetRenderState() ;
 
 	return S_OK;
 }
