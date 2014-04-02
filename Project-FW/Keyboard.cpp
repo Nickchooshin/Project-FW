@@ -6,12 +6,6 @@ Keyboard::Keyboard()
 	m_pDIDKeyboard = NULL ;
 
 	ZeroMemory(KeyBuffer, sizeof(KeyBuffer)) ;
-
-	for(int i=0; i<256; i++)
-	{
-		kStatusDown[i] = false ;
-		kStatusUp[i] = false ;
-	}
 }
 Keyboard::~Keyboard()
 {
@@ -81,8 +75,6 @@ bool Keyboard::IsButtonDown(BYTE Button)
 {
 	if(KeyBuffer[Button] & 0x80)
 	{
-		kStatusDown[Button] = true ;
-
 		return TRUE ;
 	}
 
@@ -96,39 +88,5 @@ bool Keyboard::IsButtonUp(BYTE Button)
 		return FALSE ;
 	}
 
-	kStatusUp[Button] = true ;
-
 	return TRUE ;
-}
-
-bool Keyboard::IsPressDown(BYTE Button)
-{
-	IsButtonUp(Button) ;
-	kStatusDown[Button] = false ;
-	IsButtonDown(Button) ;
-
-	if(kStatusUp[Button] && kStatusDown[Button])
-	{
-		kStatusUp[Button] = false ;
-
-		return TRUE ;
-	}
-
-	return FALSE ;
-}
-
-bool Keyboard::IsPressUp(BYTE Button)
-{
-	IsButtonDown(Button) ;
-	kStatusUp[Button] = false ;
-	IsButtonUp(Button) ;
-
-	if(kStatusUp[Button] && kStatusDown[Button])
-	{
-		kStatusDown[Button] = false ;
-
-		return TRUE ;
-	}
-
-	return FALSE ;
 }
