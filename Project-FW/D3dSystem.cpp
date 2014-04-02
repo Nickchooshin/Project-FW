@@ -2,6 +2,7 @@
 #include "InputDevice.h"
 #include "Keyboard.h"
 #include "Mouse.h"
+#include "Joystick.h"
 
 CD3dSystem::CD3dSystem()
 {
@@ -50,9 +51,16 @@ HRESULT CD3dSystem::InitD3d(HINSTANCE hInst, HWND hWnd, int nWidth, int nHeight,
 
 	m_hInst = hInst ;
 
-	g_InputDevice->InitDevice(hInst, hWnd) ;
-	g_Keyboard->Init() ;
-	g_Mouse->Init() ;
+	strcpy(ErrorStr, "InputDevice 초기화 실패") ;
+
+	if( !g_InputDevice->InitDevice(hInst, hWnd) )
+		return E_FAIL ;
+	if( !g_Keyboard->Init() )
+		return E_FAIL ;
+	if( !g_Mouse->Init() )
+		return E_FAIL ;
+	if( !g_Joystick->Init() )
+		return E_FAIL ;
 
 	SetRenderState() ;
 

@@ -79,6 +79,7 @@
   <ItemGroup>
     <ClCompile Include="D3dSystem.cpp" />
     <ClCompile Include="InputDevice.cpp" />
+    <ClCompile Include="Joystick.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mouse.cpp" />
@@ -89,6 +90,7 @@
   <ItemGroup>
     <ClInclude Include="D3dSystem.h" />
     <ClInclude Include="InputDevice.h" />
+    <ClInclude Include="Joystick.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Process.h" />

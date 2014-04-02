@@ -2,6 +2,7 @@
 
 #include "Keyboard.h"
 #include "Mouse.h"
+#include "Joystick.h"
 
 SampleProcess::SampleProcess()
 {
@@ -29,6 +30,7 @@ void SampleProcess::Update(float dt)
 {
 	g_Keyboard->Update() ;
 	g_Mouse->Update() ;
+	g_Joystick->Update() ;
 
 	if(g_Keyboard->IsButtonDown(DIK_UP))
 	{

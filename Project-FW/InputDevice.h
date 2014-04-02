@@ -5,6 +5,7 @@
 
 class Keyboard ;
 class Mouse ;
+class Joystick ;
 
 class InputDevice : public Singleton<InputDevice>
 {
@@ -20,6 +21,7 @@ public :
 
 	friend Keyboard ;
 	friend Mouse ;
+	friend Joystick ;
 } ;
 
 #define g_InputDevice InputDevice::GetInstance()

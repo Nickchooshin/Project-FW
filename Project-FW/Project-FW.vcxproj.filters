@@ -32,6 +32,9 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="Joystick.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinSystem.h">
@@ -55,6 +58,9 @@
       <Filter>Input</Filter>
     </ClInclude>
     <ClInclude Include="Mouse.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Joystick.h">
       <Filter>Input</Filter>
     </ClInclude>
   </ItemGroup>
