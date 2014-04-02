@@ -19,30 +19,23 @@ Process* SampleProcess::process()
 
 void SampleProcess::Init()
 {
-	Key = new Keyboard ;
-	Key->Init() ;
-
-	mouse = new Mouse ;
-	mouse->Init() ;
 }
 
 void SampleProcess::Destroy()
 {
-	delete Key ;
-	delete mouse ;
 }
 
 void SampleProcess::Update(float dt)
 {
-	Key->Update() ;
-	mouse->Update() ;
+	g_Keyboard->Update() ;
+	g_Mouse->Update() ;
 
-	if(Key->IsButtonDown(DIK_UP))
+	if(g_Keyboard->IsButtonDown(DIK_UP))
 	{
 		MessageBox(NULL, "UP", "UP", MB_OK) ;
 	}
 
-	if(mouse->IsMouse(Mouse::LBUTTON_DOWN))
+	if(g_Mouse->IsMouse(g_Mouse->LBUTTON_DOWN))
 	{
 		MessageBox(NULL, "LBUTTON_DOWN", "LBUTTON_DOWN", MB_OK) ;
 	}

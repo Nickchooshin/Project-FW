@@ -1,7 +1,9 @@
 #pragma once
+
+#include "Singleton.h"
 #include <dinput.h>
 
-class Mouse
+class Mouse : public Singleton<Mouse>
 {
 private :
 	LPDIRECTINPUTDEVICE8 m_pDIDMouse ;
@@ -22,3 +24,5 @@ public :
 
 	bool IsMouse(MouseButtonType ButtonType) ;
 } ;
+
+#define g_Mouse Mouse::GetInstance()

@@ -1,7 +1,9 @@
 #pragma once
+
+#include "Singleton.h"
 #include <dinput.h>
 
-class Keyboard
+class Keyboard : public Singleton<Keyboard>
 {
 private :
 	LPDIRECTINPUTDEVICE8 m_pDIDKeyboard ;
@@ -19,3 +21,5 @@ public :
 	bool IsButtonDown(BYTE Button) ;
 	bool IsButtonUp(BYTE Button) ;
 } ;
+
+#define g_Keyboard Keyboard::GetInstance()

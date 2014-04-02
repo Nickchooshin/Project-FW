@@ -1,7 +1,7 @@
 #include "D3dSystem.h"
-
-//
 #include "InputDevice.h"
+#include "Keyboard.h"
+#include "Mouse.h"
 
 CD3dSystem::CD3dSystem()
 {
@@ -51,6 +51,8 @@ HRESULT CD3dSystem::InitD3d(HINSTANCE hInst, HWND hWnd, int nWidth, int nHeight,
 	m_hInst = hInst ;
 
 	g_InputDevice->InitDevice(hInst, hWnd) ;
+	g_Keyboard->Init() ;
+	g_Mouse->Init() ;
 
 	SetRenderState() ;
 

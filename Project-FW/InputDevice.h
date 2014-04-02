@@ -17,9 +17,6 @@ public :
 	~InputDevice() ;
 
 	bool InitDevice(HINSTANCE hInstance, HWND hWnd) ;
-	//void Release() ;
-
-	//virtual HRESULT Update() = 0 ;
 
 	friend Keyboard ;
 	friend Mouse ;

@@ -26,11 +26,3 @@ bool InputDevice::InitDevice(HINSTANCE hInstance, HWND hWnd)
 
 	return true ;
 }
-
-/*void InputDevice::Release()
-{
-	if(m_lpkDInput!=NULL)
-	{
-		m_lpkDInput->Release() ;
-	}
-}*/
