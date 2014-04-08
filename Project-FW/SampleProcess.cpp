@@ -41,6 +41,31 @@ void SampleProcess::Update(float dt)
 	{
 		MessageBox(NULL, "LBUTTON_DOWN", "LBUTTON_DOWN", MB_OK) ;
 	}
+
+	if(g_Joystick->IsButtonDown(0))
+	{
+		MessageBox(NULL, "0 Button", "0 BUtton", MB_OK) ;
+	}
+	if(g_Joystick->IsButtonDown(1))
+	{
+		MessageBox(NULL, "1 Button", "1 BUtton", MB_OK) ;
+	}
+	if(g_Joystick->IsButtonDown(3))
+	{
+		MessageBox(NULL, "3 Button", "3 BUtton", MB_OK) ;
+	}
+	if(g_Joystick->IsButtonDown(4))
+	{
+		MessageBox(NULL, "4 Button", "4 BUtton", MB_OK) ;
+	}
+	if(g_Joystick->IsAxisMin(1000, 'x'))
+	{
+		MessageBox(NULL, "X 1000", "X 1000", MB_OK) ;
+	}
+	if(g_Joystick->IsPov(22500))
+	{
+		MessageBox(NULL, "POV ก็", "POV ก็", MB_OK) ;
+	}
 }
 
 void SampleProcess::Render()

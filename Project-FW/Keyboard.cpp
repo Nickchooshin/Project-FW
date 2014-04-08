@@ -72,19 +72,15 @@ bool Keyboard::Update()
 bool Keyboard::IsButtonDown(BYTE Button)
 {
 	if(KeyBuffer[Button] & 0x80)
-	{
-		return TRUE ;
-	}
+		return true ;
 
-	return FALSE ;
+	return false ;
 }
 
 bool Keyboard::IsButtonUp(BYTE Button)
 {
 	if(KeyBuffer[Button] & 0x80)
-	{
-		return FALSE ;
-	}
+		return false ;
 
-	return TRUE ;
+	return true ;
 }

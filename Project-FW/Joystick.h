@@ -10,6 +10,8 @@ class Joystick : public Singleton<Joystick>
 private :
 	LPDIRECTINPUTDEVICE8 m_pDIDJoystick ;
 
+	DIJOYSTATE2 JoystickBuffer ;
+
 public :
 	Joystick() ;
 	~Joystick() ;
@@ -20,6 +22,9 @@ public :
 
 	bool IsButtonDown(BYTE Button) ;
 	bool IsButtonUp(BYTE Button) ;
+	bool IsAxisMin(LONG Min, char Axis) ;
+	bool IsAxisMax(LONG Max, char Axis) ;
+	bool IsPov(DWORD Pov) ;
 private :
 	friend BOOL CALLBACK EnumAxesCallback(const DIDEVICEOBJECTINSTANCE* instance, VOID* context) ;
 } ;

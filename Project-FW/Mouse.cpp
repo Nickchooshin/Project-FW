@@ -4,8 +4,6 @@
 Mouse::Mouse()
 {
 	m_pDIDMouse = NULL ;
-
-	ZeroMemory(KeyBuffer, sizeof(KeyBuffer)) ;
 }
 Mouse::~Mouse()
 {
@@ -43,13 +41,13 @@ bool Mouse::Init()
 	}
 
 	m_pDIDMouse->Acquire() ;										// 마우스 DirectInputDevice 습득
-	m_pDIDMouse->GetDeviceState(sizeof(KeyBuffer), &KeyBuffer) ;	// 마우스 DirectInputDevice 에서 마우스의 상태를 가져온다
+
+	return true ;
 }
 
 bool Mouse::Update()
 {
 	HRESULT hr ;
-	ZeroMemory(KeyBuffer, sizeof(KeyBuffer)) ;
 
 	// 마우스 디바이스로부터 마우스 상태를 가져올 수 없으면
 	// 마우스 디바이스를 다시 습득한다

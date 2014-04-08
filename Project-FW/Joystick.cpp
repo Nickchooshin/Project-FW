@@ -25,7 +25,7 @@ bool Joystick::Init()
 	}
 
 	// Á¶ÀÌ½ºÆ½ DirectInputDevice Æ÷¸ä ¼³Á¤
-	if( FAILED( m_pDIDJoystick->SetDataFormat( &c_dfDIJoystick ) ) )
+	if( FAILED( m_pDIDJoystick->SetDataFormat( &c_dfDIJoystick2 ) ) )
 	{
 		MessageBox(NULL, "Joystick SetDataFormat Fail", "Error", MB_OK) ;
 		return false ;
@@ -99,5 +99,104 @@ bool Joystick::Update()
 			return hr ;
 	}
 
+	if( FAILED( hr = m_pDIDJoystick->GetDeviceState(sizeof(DIJOYSTATE2), &JoystickBuffer) ) )
+		return hr ;
+
 	return true ;
+}
+
+bool Joystick::IsButtonDown(BYTE Button)
+{
+	if(JoystickBuffer.rgbButtons[Button] & 0x80)
+		return true ;
+
+	return false ;
+}
+
+bool Joystick::IsButtonUp(BYTE Button)
+{
+	if(JoystickBuffer.rgbButtons[Button] & 0x80)
+		return false ;
+
+	return true ;
+}
+
+bool Joystick::IsAxisMin(LONG Min, char Axis)
+{
+	LONG axis ;
+
+	switch(Axis)
+	{
+	case 'x' :
+	case 'X' :
+		axis = JoystickBuffer.lX ;
+		break ;
+
+	case 'y' :
+	case 'Y' :
+		axis = JoystickBuffer.lY ;
+		break ;
+
+	case 'z' :
+	case 'Z' :
+		axis = JoystickBuffer.lZ ;
+		break ;
+
+	case 'r' :
+	case 'R' :
+		axis = JoystickBuffer.lRz ;
+		break ;
+
+	default :
+		return false ;
+	}
+
+	if(axis>=Min)
+		return true ;
+
+	return false ;
+}
+
+bool Joystick::IsAxisMax(LONG Max, char Axis)
+{
+	LONG axis ;
+
+	switch(Axis)
+	{
+	case 'x' :
+	case 'X' :
+		axis = JoystickBuffer.lX ;
+		break ;
+
+	case 'y' :
+	case 'Y' :
+		axis = JoystickBuffer.lY ;
+		break ;
+
+	case 'z' :
+	case 'Z' :
+		axis = JoystickBuffer.lZ ;
+		break ;
+
+	case 'r' :
+	case 'R' :
+		axis = JoystickBuffer.lRz ;
+		break ;
+
+	default :
+		return false ;
+	}
+
+	if(axis<=Max)
+		return true ;
+
+	return false ;
+}
+
+bool Joystick::IsPov(DWORD Pov)
+{
+	if(JoystickBuffer.rgdwPOV[0]==Pov)
+		return true ;
+
+	return false ;
 }

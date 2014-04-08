@@ -9,8 +9,6 @@ private :
 	LPDIRECTINPUTDEVICE8 m_pDIDMouse ;
 
 	DIMOUSESTATE MouseBuffer ;
-
-	char KeyBuffer[256] ;
 public :
 	enum MouseButtonType{LBUTTON_DOWN, LBUTTON_UP, RBUTTON_DOWN, RBUTTON_UP} ;
 
