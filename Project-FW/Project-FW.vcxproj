@@ -85,6 +85,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="ProcessManager.cpp" />
     <ClCompile Include="SampleProcess.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="WinSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +98,7 @@
     <ClInclude Include="ProcessManager.h" />
     <ClInclude Include="SampleProcess.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="WinSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

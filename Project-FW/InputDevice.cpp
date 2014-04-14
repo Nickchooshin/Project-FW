@@ -1,7 +1,7 @@
 #include "InputDevice.h"
 
 InputDevice::InputDevice() : m_pDInput(NULL),
-								m_hWnd(NULL)
+							 m_hWnd(NULL)
 {
 }
 InputDevice::~InputDevice()

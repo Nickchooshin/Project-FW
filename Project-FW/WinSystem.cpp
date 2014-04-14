@@ -3,8 +3,8 @@
 #include "ProcessManager.h"
 
 CWinSystem::CWinSystem(HINSTANCE hInst) : m_hInst(hInst),
-											t(0.0f),
-											dwOldTime(0)
+										  t(0.0f),
+										  dwOldTime(0)
 {
 }
 CWinSystem::~CWinSystem()

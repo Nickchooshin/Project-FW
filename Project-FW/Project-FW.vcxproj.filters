@@ -10,6 +10,9 @@
     <Filter Include="Input">
       <UniqueIdentifier>{87261a76-29c9-46b9-97f2-4194d02717a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sprite">
+      <UniqueIdentifier>{661a19b8-2bd6-40a3-8681-4cd1102000af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinSystem.cpp">
@@ -34,6 +37,9 @@
     </ClCompile>
     <ClCompile Include="Joystick.cpp">
       <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="Joystick.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Sprite</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

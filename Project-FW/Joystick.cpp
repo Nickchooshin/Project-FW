@@ -2,7 +2,7 @@
 #include "InputDevice.h"
 
 Joystick::Joystick() : m_pDIDJoystick(NULL),
-						m_bReady(false)
+					   m_bReady(false)
 {
 }
 Joystick::~Joystick()

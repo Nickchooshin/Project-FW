@@ -4,6 +4,10 @@
 #include "Mouse.h"
 #include "Joystick.h"
 
+#include "Sprite.h"
+
+CSprite pSprite ;
+
 SampleProcess::SampleProcess()
 {
 }
@@ -20,6 +24,7 @@ Process* SampleProcess::process()
 
 void SampleProcess::Init()
 {
+	pSprite.Init(50.0f, 50.0f, "sample_texture.png") ;
 }
 
 void SampleProcess::Destroy()
@@ -70,4 +75,5 @@ void SampleProcess::Update(float dt)
 
 void SampleProcess::Render()
 {
+	pSprite.Render() ;
 }
