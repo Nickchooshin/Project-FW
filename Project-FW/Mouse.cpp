@@ -33,7 +33,7 @@ bool Mouse::Init()
 	// 마우스 DirectInputDevice 의 액세스 권한을 설정
 	// DISCL_EXCLUSIVE (독점모드) - 다른 애플리케이션으로 포커스 이동이 안된다. 마우스와 키보드를 독점모드로 사용하게 될 경우 윈도우 메뉴, 이동, 크기 변경을 할 수 없다. DISCL_BACKGROUND와 같이 쓰일 수 없다.
 	// DISCL_FOREGROUND - 포커스를 가지고 있지 않을 경우 디바이스의 데이터(상태)를 얻지 못 한다.
-	if( FAILED( m_pDIDMouse->SetCooperativeLevel( g_InputDevice->m_hWnd, DISCL_NONEXCLUSIVE | DISCL_BACKGROUND ) ) )
+	if( FAILED( m_pDIDMouse->SetCooperativeLevel( g_InputDevice->m_hWnd, DISCL_EXCLUSIVE | DISCL_FOREGROUND ) ) )
 	{
 		MessageBox(NULL, "Mouse SetCooperativeLevel Fail", "Error", MB_OK) ;
 		return false ;

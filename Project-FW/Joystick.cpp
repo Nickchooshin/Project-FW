@@ -1,7 +1,8 @@
 #include "Joystick.h"
 #include "InputDevice.h"
 
-Joystick::Joystick() : m_pDIDJoystick(NULL)
+Joystick::Joystick() : m_pDIDJoystick(NULL),
+						m_bReady(false)
 {
 }
 Joystick::~Joystick()
@@ -19,14 +20,14 @@ bool Joystick::Init()
 	// 조이스틱 DirectInputDevice 초기화
 	if( FAILED( g_InputDevice->m_pDInput->CreateDevice( GUID_Joystick, &m_pDIDJoystick, NULL ) ) )
 	{
-		MessageBox(NULL, "Joystick CreateDevice Fail", "Error", MB_OK) ;
+		//MessageBox(NULL, "Joystick CreateDevice Fail", "Error", MB_OK) ;
 		return false ;
 	}
 
 	// 조이스틱 DirectInputDevice 포멧 설정
 	if( FAILED( m_pDIDJoystick->SetDataFormat( &c_dfDIJoystick2 ) ) )
 	{
-		MessageBox(NULL, "Joystick SetDataFormat Fail", "Error", MB_OK) ;
+		//MessageBox(NULL, "Joystick SetDataFormat Fail", "Error", MB_OK) ;
 		return false ;
 	}
 
@@ -35,7 +36,7 @@ bool Joystick::Init()
 	// DISCL_FOREGROUND - 포커스를 가지고 있지 않을 경우 디바이스의 데이터(상태)를 얻지 못 한다.
 	if( FAILED( m_pDIDJoystick->SetCooperativeLevel( g_InputDevice->m_hWnd, DISCL_EXCLUSIVE | DISCL_FOREGROUND ) ) )
 	{
-		MessageBox(NULL, "Joystick SetCooperativeLevel Fail", "Error", MB_OK) ;
+		//MessageBox(NULL, "Joystick SetCooperativeLevel Fail", "Error", MB_OK) ;
 		return false ;
 	}
 
@@ -45,18 +46,20 @@ bool Joystick::Init()
 	diDevCaps.dwSize = sizeof(DIDEVCAPS) ;
 	if( FAILED( m_pDIDJoystick->GetCapabilities(&diDevCaps) ) )
 	{
-		MessageBox(NULL, "Joystick GetCapabilities Fail", "Error", MB_OK) ;
+		//MessageBox(NULL, "Joystick GetCapabilities Fail", "Error", MB_OK) ;
 		return false ;
 	}
 
 	// 메서드의 최초의 인수 EnumAxesCallback 는, 열거된 개체를 필요에 따라서 처리하는 콜백 함수의 주소이다.
 	if( FAILED( m_pDIDJoystick->EnumObjects(EnumAxesCallback, (void*)g_InputDevice->m_hWnd, DIDFT_AXIS) ) )
 	{
-		MessageBox(NULL, "Joystick EnumObjects Fail", "Error", MB_OK) ;
+		//MessageBox(NULL, "Joystick EnumObjects Fail", "Error", MB_OK) ;
 		return false ;
 	}
 
 	m_pDIDJoystick->Poll() ;
+
+	m_bReady = true ;
 
 	return true ;
 }
@@ -81,6 +84,9 @@ BOOL CALLBACK EnumAxesCallback(const DIDEVICEOBJECTINSTANCE* instance, VOID* con
 
 bool Joystick::Update()
 {
+	if(!m_bReady)
+		return false ;
+
 	HRESULT hr ;
 
 	// 조이스틱 디바이스로부터 조이스틱의 상태를 가져올 수 없으면

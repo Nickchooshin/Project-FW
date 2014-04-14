@@ -58,8 +58,9 @@ HRESULT CD3dSystem::InitD3d(HINSTANCE hInst, HWND hWnd, int nWidth, int nHeight,
 		return E_FAIL ;
 	if( !g_Mouse->Init() )
 		return E_FAIL ;
-	if( !g_Joystick->Init() )
-		return E_FAIL ;
+	g_Joystick->Init() ;
+	//if( !g_Joystick->Init() )
+	//	return E_FAIL ;
 
 	SetRenderState() ;
 
