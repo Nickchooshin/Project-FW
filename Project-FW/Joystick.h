@@ -12,6 +12,8 @@ private :
 
 	DIJOYSTATE2 JoystickBuffer ;
 
+	bool m_bReady ;
+
 public :
 	Joystick() ;
 	~Joystick() ;

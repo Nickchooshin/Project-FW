@@ -4,10 +4,9 @@
 #include "Mouse.h"
 #include "Joystick.h"
 
-CD3dSystem::CD3dSystem()
+CD3dSystem::CD3dSystem() : g_pD3d(NULL),
+							g_pd3dDevice(NULL)
 {
-	g_pD3d = NULL ;
-	g_pd3dDevice = NULL ;
 }
 CD3dSystem::~CD3dSystem()
 {

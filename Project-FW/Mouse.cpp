@@ -1,9 +1,8 @@
 #include "Mouse.h"
 #include "InputDevice.h"
 
-Mouse::Mouse()
+Mouse::Mouse() : m_pDIDMouse(NULL)
 {
-	m_pDIDMouse = NULL ;
 }
 Mouse::~Mouse()
 {

@@ -1,10 +1,8 @@
 #include "Keyboard.h"
 #include "InputDevice.h"
 
-Keyboard::Keyboard()
+Keyboard::Keyboard() : m_pDIDKeyboard(NULL)
 {
-	m_pDIDKeyboard = NULL ;
-
 	ZeroMemory(KeyBuffer, sizeof(KeyBuffer)) ;
 }
 Keyboard::~Keyboard()

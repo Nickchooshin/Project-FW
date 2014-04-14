@@ -1,9 +1,8 @@
 #include "Joystick.h"
 #include "InputDevice.h"
 
-Joystick::Joystick()
+Joystick::Joystick() : m_pDIDJoystick(NULL)
 {
-	m_pDIDJoystick = NULL ;
 }
 Joystick::~Joystick()
 {
@@ -58,6 +57,8 @@ bool Joystick::Init()
 	}
 
 	m_pDIDJoystick->Poll() ;
+
+	return true ;
 }
 
 BOOL CALLBACK EnumAxesCallback(const DIDEVICEOBJECTINSTANCE* instance, VOID* context)
