@@ -4,6 +4,10 @@
 #include "Mouse.h"
 #include "Joystick.h"
 
+#include "Camera.h"
+
+static CCamera Camera ;
+
 SampleProcess::SampleProcess()
 {
 }
@@ -70,4 +74,5 @@ void SampleProcess::Update(float dt)
 
 void SampleProcess::Render()
 {
+	Camera.Run() ;
 }

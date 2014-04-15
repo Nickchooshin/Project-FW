@@ -10,6 +10,9 @@
     <Filter Include="Input">
       <UniqueIdentifier>{87261a76-29c9-46b9-97f2-4194d02717a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{5ac00008-7fcf-4a19-b0fa-f6c7589c3271}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinSystem.cpp">
@@ -34,6 +37,9 @@
     </ClCompile>
     <ClCompile Include="Joystick.cpp">
       <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="Joystick.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

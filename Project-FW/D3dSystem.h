@@ -6,8 +6,8 @@ class CD3dSystem
 {
 private :
 	HINSTANCE			m_hInst ;
-	LPDIRECT3D9			g_pD3d ;
-	LPDIRECT3DDEVICE9	g_pd3dDevice ;
+	LPDIRECT3D9			m_pD3d ;
+	LPDIRECT3DDEVICE9	m_pd3dDevice ;
 
 public :
 	CD3dSystem() ;
