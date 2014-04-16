@@ -41,7 +41,40 @@ void SampleProcess::Update(float dt)
 
 	if(g_Keyboard->IsButtonDown(DIK_UP))
 	{
-		MessageBox(NULL, "UP", "UP", MB_OK) ;
+		//MessageBox(NULL, "UP", "UP", MB_OK) ;
+		pSprite.SetAngle(0) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_DOWN))
+	{
+		pSprite.TexReverse() ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_RIGHT))
+	{
+		pSprite.SetAngle(-90) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_LEFT))
+	{
+		pSprite.SetAngle(90) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_0))
+	{
+		pSprite.SetCenterPoint(0.0f, 0.0f) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_1))
+	{
+		pSprite.SetCenterPoint(10.f, 0.0f) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_2))
+	{
+		pSprite.SetCenterPoint(-10.f, 0.0f) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_3))
+	{
+		pSprite.SetCenterPoint(0.0f, 10.0f) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_4))
+	{
+		pSprite.SetCenterPoint(0.0f, -10.0f) ;
 	}
 
 	if(g_Mouse->IsMouse(g_Mouse->LBUTTON_DOWN))
