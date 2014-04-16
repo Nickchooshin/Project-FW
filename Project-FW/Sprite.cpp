@@ -7,8 +7,9 @@ CSprite::CSprite() : m_pVB(NULL),
 					 m_pIB(NULL),
 					 m_pTexture(NULL),
 					 m_fWidth(0.0f), m_fHeight(0.0f),
-					 m_fScaleX(1.0f), m_fScaleY(1.0f),
 					 m_fX(0.0f), m_fY(0.0f),
+					 m_fCenterX(0.0f), m_fCenterY(0.0f),
+					 m_fScaleX(1.0f), m_fScaleY(1.0f),
 					 m_R(255), m_G(255), m_B(255),
 					 m_nAlpha(255)
 {
@@ -43,6 +44,104 @@ bool CSprite::Init(float Width, float Height, char *texfile)
 		return false ;
 
 	return true ;
+}
+
+void CSprite::SetXY(float X, float Y)
+{
+	m_fX = X ;
+	m_fY = Y ;
+}
+
+void CSprite::SetAngle(float Angle, char Direction)
+{
+	int index ;
+
+	switch(Direction)
+	{
+	case 'x' :
+	case 'X' :
+		index = 0 ;
+		break ;
+	case 'y' :
+	case 'Y' :
+		index = 1 ;
+		break ;
+	case 'z' :
+	case 'Z' :
+		index = 2 ;
+		break ;
+	}
+
+	// DirectX는 라디안 각도를 기본으로 한다.
+	// 입력 각도는 파이로 받고, 이것을 라디안값으로 바꿔서 넣어준다.
+	m_fAngle[index] = (Angle * D3DX_PI) / 180 ;
+}
+
+void CSprite::SetScale(float ScaleX, float ScaleY)
+{
+	m_fScaleX = ScaleX ;
+	m_fScaleY = ScaleY ;
+}
+
+void CSprite::SetRGB(int R, int G, int B)
+{
+	m_R = R ;
+	m_G = G ;
+	m_B = B ;
+
+	SPRITE_VERTEX* pVertices;
+	if( FAILED( m_pVB->Lock( 0, sizeof(SPRITE_VERTEX), (void**)&pVertices, 0 ) ) )
+		return;
+
+	pVertices[0].color = D3DCOLOR_XRGB(m_R, m_G, m_B) ;
+	pVertices[1].color = D3DCOLOR_XRGB(m_R, m_G, m_B) ;
+	pVertices[2].color = D3DCOLOR_XRGB(m_R, m_G, m_B) ;
+	pVertices[3].color = D3DCOLOR_XRGB(m_R, m_G, m_B) ;
+
+	m_pVB->Unlock();
+}
+
+void CSprite::SetAlpha(int Alpha)
+{
+	m_nAlpha = Alpha ;
+}
+
+void CSprite::TexReverse()
+{
+	int i ;
+	float tu[4], tv[4] ;
+
+	for(i=0; i<2; i++)
+	{
+		tu[1-i] = m_tu[i] ; 
+		tu[3-i] = m_tu[2+i] ;
+		tv[1-i] = m_tv[i] ;
+		tv[3-i] = m_tv[2+i] ;
+	}
+
+	for(i=0; i<4; i++)
+	{
+		m_tu[i] = tu[i] ;
+		m_tv[i] = tv[i] ;
+	}
+
+	SPRITE_VERTEX* pVertices;
+	if( FAILED( m_pVB->Lock( 0, sizeof(SPRITE_VERTEX), (void**)&pVertices, 0 ) ) )
+		return;
+
+	for(i=0; i<4; i++)
+	{
+		pVertices[i].tu = tu[i] ;
+		pVertices[i].tv = tv[i] ;
+	}
+
+	m_pVB->Unlock();
+}
+
+void CSprite::SetCenterPoint(float CenterX, float CenterY)
+{
+	m_fCenterX = CenterX ;
+	m_fCenterY = CenterY ;
 }
 
 void CSprite::Render()
@@ -144,14 +243,15 @@ bool CSprite::SetTexture(char *texfile)
 
 void CSprite::SetupMatrices()
 {
-	D3DXMATRIXA16 matWorld, matX, matY, matZ, matT, matS ;
+	D3DXMATRIXA16 matWorld, matX, matY, matZ, matT, matT2, matS ;
 	D3DXMatrixIdentity( &matWorld );
 	D3DXMatrixRotationZ(&matX, m_fAngle[0]);
 	D3DXMatrixRotationZ(&matY, m_fAngle[1]);
 	D3DXMatrixRotationZ(&matZ, m_fAngle[2]);
 	D3DXMatrixTranslation( &matT, m_fX, m_fY, 0.0f );
+	D3DXMatrixTranslation( &matT2, m_fCenterX, m_fCenterY, 0.0f) ;
 	D3DXMatrixScaling( &matS, m_fScaleX, m_fScaleY, 0.0f ) ;
 
-	matWorld = matWorld * matX * matY * matZ * matT ;
+	matWorld = matWorld * matT2 * matX * matY * matZ * matT ;
 	pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld );
 }
