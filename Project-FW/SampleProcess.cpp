@@ -5,11 +5,13 @@
 #include "Joystick.h"
 
 #include "Sprite.h"
+#include "UISprite.h"
 #include "Camera.h"
 
 const int sprite_max=1000 ;
 
 CSprite Sprite ;
+CUISprite UISprite ;
 CCamera Camera ;
 
 SampleProcess::SampleProcess()
@@ -29,6 +31,7 @@ Process* SampleProcess::process()
 void SampleProcess::Init()
 {
 	Sprite.Init(50.0f, 50.0f, "sample_texture.png") ;
+	UISprite.Init(60.0f, 80.0f, "sample_texture2.png") ;
 }
 
 void SampleProcess::Destroy()
@@ -91,6 +94,7 @@ void SampleProcess::Update(float dt)
 	}*/
 
 	Sprite.SetXY(x, y) ;
+	UISprite.SetXY(100.0f, 100.0f) ;
 }
 
 void SampleProcess::Render()
@@ -98,4 +102,5 @@ void SampleProcess::Render()
 	Camera.Run() ;
 
 	Sprite.Render() ;
+	UISprite.Render() ;
 }

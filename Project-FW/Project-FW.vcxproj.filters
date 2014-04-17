@@ -30,6 +30,9 @@
     <ClCompile Include="D3dSystem.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="UISprite.cpp">
+      <Filter>Sprite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SampleProcess.h" />
@@ -63,6 +66,9 @@
     </ClInclude>
     <ClInclude Include="D3dSystem.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="UISprite.h">
+      <Filter>Sprite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

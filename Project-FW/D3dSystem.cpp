@@ -4,6 +4,7 @@
 #include "Mouse.h"
 #include "Joystick.h"
 #include "Sprite.h"
+#include "UISprite.h"
 #include "Camera.h"
 
 CD3dSystem::CD3dSystem() : m_pD3d(NULL),
@@ -65,6 +66,7 @@ HRESULT CD3dSystem::InitD3d(HINSTANCE hInst, HWND hWnd, int nWidth, int nHeight,
 	//	return E_FAIL ;
 
 	CSprite::pd3dDevice = m_pd3dDevice ;
+	CUISprite::pd3dDevice = m_pd3dDevice ;
 
 	CCamera::pd3dDevice = m_pd3dDevice ;
 	CCamera::WinWidth = (float)nWidth ;
