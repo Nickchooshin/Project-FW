@@ -7,7 +7,9 @@
 #include "Sprite.h"
 #include "Camera.h"
 
-CSprite pSprite ;
+const int sprite_max=1000 ;
+
+CSprite Sprite ;
 CCamera Camera ;
 
 SampleProcess::SampleProcess()
@@ -26,7 +28,7 @@ Process* SampleProcess::process()
 
 void SampleProcess::Init()
 {
-	pSprite.Init(50.0f, 50.0f, "sample_texture.png") ;
+	Sprite.Init(50.0f, 50.0f, "sample_texture.png") ;
 }
 
 void SampleProcess::Destroy()
@@ -39,45 +41,26 @@ void SampleProcess::Update(float dt)
 	g_Mouse->Update() ;
 	g_Joystick->Update() ;
 
+	static float x=0.0f, y=0.0f ;
+
 	if(g_Keyboard->IsButtonDown(DIK_UP))
 	{
-		//MessageBox(NULL, "UP", "UP", MB_OK) ;
-		pSprite.SetAngle(0) ;
+		y += 1.5f ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_DOWN))
 	{
-		pSprite.TexReverse() ;
+		y -= 1.5f ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_RIGHT))
 	{
-		pSprite.SetAngle(-90) ;
+		x += 1.5f ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_LEFT))
 	{
-		pSprite.SetAngle(90) ;
-	}
-	if(g_Keyboard->IsButtonDown(DIK_0))
-	{
-		pSprite.SetCenterPoint(0.0f, 0.0f) ;
-	}
-	if(g_Keyboard->IsButtonDown(DIK_1))
-	{
-		pSprite.SetCenterPoint(10.f, 0.0f) ;
-	}
-	if(g_Keyboard->IsButtonDown(DIK_2))
-	{
-		pSprite.SetCenterPoint(-10.f, 0.0f) ;
-	}
-	if(g_Keyboard->IsButtonDown(DIK_3))
-	{
-		pSprite.SetCenterPoint(0.0f, 10.0f) ;
-	}
-	if(g_Keyboard->IsButtonDown(DIK_4))
-	{
-		pSprite.SetCenterPoint(0.0f, -10.0f) ;
+		x -= 1.5f ;
 	}
 
-	if(g_Mouse->IsMouse(g_Mouse->LBUTTON_DOWN))
+	/*if(g_Mouse->IsMouse(g_Mouse->LBUTTON_DOWN))
 	{
 		MessageBox(NULL, "LBUTTON_DOWN", "LBUTTON_DOWN", MB_OK) ;
 	}
@@ -105,12 +88,14 @@ void SampleProcess::Update(float dt)
 	if(g_Joystick->IsPov(22500))
 	{
 		MessageBox(NULL, "POV ก็", "POV ก็", MB_OK) ;
-	}
+	}*/
+
+	Sprite.SetXY(x, y) ;
 }
 
 void SampleProcess::Render()
 {
 	Camera.Run() ;
 
-	pSprite.Render() ;
+	Sprite.Render() ;
 }
