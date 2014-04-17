@@ -48,8 +48,12 @@ bool CSprite::Init(float Width, float Height, char *texfile)
 
 void CSprite::SetXY(float X, float Y)
 {
-	m_fX = X ;
-	m_fY = Y ;
+	// 소수점 단위로 설정하면, 텍셀과 픽셀의 위치가 어긋나기 때문에
+	// 화면상에서 픽셀이 일그러져 보이는 경우가 생긴다.
+	// 이를 위해, 불필요한 소수점을 제거하기 위해 정수형에 맞춰 반올림 해준다.
+
+	m_fX = (float)((int) (X + 0.5f) ) ;
+	m_fY = (float)((int) (Y + 0.5f) ) ;
 }
 
 void CSprite::SetAngle(float Angle, char Direction)
