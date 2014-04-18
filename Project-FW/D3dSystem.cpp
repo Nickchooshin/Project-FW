@@ -7,6 +7,8 @@
 #include "UISprite.h"
 #include "Camera.h"
 
+#include "TextureManager.h"
+
 CD3dSystem::CD3dSystem() : m_pD3d(NULL),
 						   m_pd3dDevice(NULL)
 {
@@ -65,8 +67,7 @@ HRESULT CD3dSystem::InitD3d(HINSTANCE hInst, HWND hWnd, int nWidth, int nHeight,
 	//if( !g_Joystick->Init() )
 	//	return E_FAIL ;
 
-	CSprite::pd3dDevice = m_pd3dDevice ;
-	CUISprite::pd3dDevice = m_pd3dDevice ;
+	g_TextureManager->pd3dDevice = m_pd3dDevice ;
 
 	CCamera::pd3dDevice = m_pd3dDevice ;
 	CCamera::WinWidth = (float)nWidth ;
