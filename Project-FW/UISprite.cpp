@@ -112,17 +112,17 @@ void CUISprite::TexReverse()
 		m_tv[i] = tv[i] ;
 	}
 
-	UISPRITE_VERTEX* pVertices;
+	UISPRITE_VERTEX* pVertices ;
 	if( FAILED( m_pVB->Lock( 0, sizeof(UISPRITE_VERTEX), (void**)&pVertices, 0 ) ) )
-		return;
+		return ;
 
 	for(i=0; i<4; i++)
 	{
-		pVertices[i].tu = tu[i] ;
-		pVertices[i].tv = tv[i] ;
+		pVertices[i].tu = m_tu[i] ;
+		pVertices[i].tv = m_tv[i] ;
 	}
 
-	m_pVB->Unlock();
+	m_pVB->Unlock() ;
 }
 
 void CUISprite::Render()
@@ -167,9 +167,9 @@ HRESULT CUISprite::InitVB()
 		return E_FAIL;
 	}
 
-	UISPRITE_VERTEX* pVertices;
+	UISPRITE_VERTEX* pVertices ;
 	if( FAILED( m_pVB->Lock( 0, sizeof(UISPRITE_VERTEX), (void**)&pVertices, 0 ) ) )
-		return E_FAIL;
+		return E_FAIL ;
 
 	float Width_Half = m_fWidth / 2.0f ;
 	float Height_Half = m_fHeight / 2.0f ;
@@ -202,7 +202,7 @@ HRESULT CUISprite::InitVB()
 	pVertices[3].tu = m_tu[3] ;
 	pVertices[3].tv = m_tv[3] ;
 
-	m_pVB->Unlock();
+	m_pVB->Unlock() ;
 
 	return true ;
 }
