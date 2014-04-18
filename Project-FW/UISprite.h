@@ -13,6 +13,8 @@ private :
 	int m_R, m_G, m_B ;
 	int m_nAlpha ;
 	float m_tu[4], m_tv[4] ;
+
+	D3DXIMAGE_INFO m_TexInfo ;
 public :
 	static LPDIRECT3DDEVICE9 pd3dDevice ;
 
@@ -20,12 +22,14 @@ public :
 	CUISprite() ;
 	~CUISprite() ;
 
+	bool Init(char *texfile) ;
 	bool Init(float Width, float Height, char *texfile) ;
 
 	void SetXY(float X, float Y) ;						// 좌표설정 (중앙 기준)
 	void SetRGB(int R, int G, int B) ;					// RGB값 설정
 	void SetAlpha(int Alpha) ;							// 알파값 설정 0~255
-
+	
+	void SetTextureUV(float u1, float v1, float u2, float v2) ;	// 텍스쳐 UV 설정
 	void TexReverse() ;									// 텍스쳐 뒤집기
 
 	void Render() ;

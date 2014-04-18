@@ -33,6 +33,18 @@ CSprite::~CSprite()
 		m_pTexture->Release() ;
 }
 
+bool CSprite::Init(char *texfile)
+{
+	if(!SetTexture(texfile))
+		return false ;
+
+	m_fWidth = (float)m_TexInfo.Width ;
+	m_fHeight = (float)m_TexInfo.Height ;
+
+	if(FAILED(InitVB()))
+		return false ;
+}
+
 bool CSprite::Init(float Width, float Height, char *texfile)
 {
 	m_fWidth = Width ;
@@ -40,7 +52,7 @@ bool CSprite::Init(float Width, float Height, char *texfile)
 
 	if(FAILED(InitVB()))
 		return false ;
-	if(SetTexture(texfile))
+	if(!SetTexture(texfile))
 		return false ;
 
 	return true ;
@@ -113,8 +125,8 @@ void CSprite::SetAlpha(int Alpha)
 void CSprite::SetTextureUV(float u1, float v1, float u2, float v2)
 {
 	int i ;
-	float Width = (float)m_pTexInfo.Width ;
-	float Height = (float)m_pTexInfo.Height ;
+	float Width = (float)m_TexInfo.Width ;
+	float Height = (float)m_TexInfo.Height ;
 
 	m_tu[0] = u1/Width ;	m_tv[0] = v1/Height ;
 	m_tu[1] = u2/Width ;	m_tv[1] = v1/Height ;
@@ -257,7 +269,7 @@ HRESULT CSprite::InitVB()
 bool CSprite::SetTexture(char *texfile)
 {
 	if( FAILED( D3DXCreateTextureFromFileEx( pd3dDevice, texfile, D3DX_DEFAULT_NONPOW2, D3DX_DEFAULT_NONPOW2, 1, NULL,
-		D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_NONE,D3DX_FILTER_NONE, NULL, &m_pTexInfo, NULL, &m_pTexture ) ) )
+		D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_NONE,D3DX_FILTER_NONE, NULL, &m_TexInfo, NULL, &m_pTexture ) ) )
 	{
 		char str[1024] ;
 		sprintf(str, "Could not find %s Texture File", texfile) ;
