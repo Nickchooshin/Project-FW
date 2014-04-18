@@ -87,6 +87,7 @@
     <ClCompile Include="ProcessManager.cpp" />
     <ClCompile Include="SampleProcess.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UISprite.cpp" />
     <ClCompile Include="WinSystem.cpp" />
   </ItemGroup>
@@ -102,6 +103,7 @@
     <ClInclude Include="SampleProcess.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UISprite.h" />
     <ClInclude Include="WinSystem.h" />
   </ItemGroup>

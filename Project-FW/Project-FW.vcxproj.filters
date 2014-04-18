@@ -33,6 +33,9 @@
     <ClCompile Include="UISprite.cpp">
       <Filter>Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Sprite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SampleProcess.h" />
@@ -68,6 +71,9 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="UISprite.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
       <Filter>Sprite</Filter>
     </ClInclude>
   </ItemGroup>

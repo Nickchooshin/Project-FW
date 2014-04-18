@@ -18,8 +18,6 @@ private :
 	float m_tu[4], m_tv[4] ;
 
 	D3DXIMAGE_INFO m_TexInfo ;
-public :
-	static LPDIRECT3DDEVICE9 pd3dDevice ;
 
 public :
 	CSprite() ;
