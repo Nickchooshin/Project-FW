@@ -31,6 +31,7 @@ Process* SampleProcess::process()
 void SampleProcess::Init()
 {
 	Sprite.Init(50.0f, 50.0f, "sample_texture.png") ;
+	Sprite.SetTextureUV(0.0f, 0.0f, 50.0f, 50.0f) ;
 	UISprite.Init(60.0f, 80.0f, "sample_texture2.png") ;
 }
 
@@ -61,6 +62,23 @@ void SampleProcess::Update(float dt)
 	if(g_Keyboard->IsButtonDown(DIK_LEFT))
 	{
 		x -= 1.5f ;
+	}
+
+	if(g_Keyboard->IsButtonDown(DIK_1))
+	{
+		Sprite.SetTextureUV(0.0f, 0.0f, 50.0f, 50.0f) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_2))
+	{
+		Sprite.SetTextureUV(50.0f, 0.0f, 100.0f, 50.0f) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_3))
+	{
+		Sprite.SetTextureUV(0.0f, 50.0f, 50.0f, 100.0f) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_4))
+	{
+		Sprite.SetTextureUV(50.0f, 50.0f, 100.0f, 100.0f) ;
 	}
 
 	/*if(g_Mouse->IsMouse(g_Mouse->LBUTTON_DOWN))

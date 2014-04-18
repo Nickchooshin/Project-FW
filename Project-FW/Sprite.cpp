@@ -110,6 +110,30 @@ void CSprite::SetAlpha(int Alpha)
 	m_nAlpha = Alpha ;
 }
 
+void CSprite::SetTextureUV(float u1, float v1, float u2, float v2)
+{
+	int i ;
+	float Width = (float)m_pTexInfo.Width ;
+	float Height = (float)m_pTexInfo.Height ;
+
+	m_tu[0] = u1/Width ;	m_tv[0] = v1/Height ;
+	m_tu[1] = u2/Width ;	m_tv[1] = v1/Height ;
+	m_tu[2] = u1/Width ;	m_tv[2] = v2/Height ;
+	m_tu[3] = u2/Width ;	m_tv[3] = v2/Height ;
+
+	SPRITE_VERTEX* pVertices ;
+	if( FAILED( m_pVB->Lock( 0, sizeof(SPRITE_VERTEX), (void**)&pVertices, 0 ) ) )
+		return ;
+
+	for(i=0; i<4; i++)
+	{
+		pVertices[i].tu = m_tu[i] ;
+		pVertices[i].tv = m_tv[i] ;
+	}
+
+	m_pVB->Unlock() ;
+}
+
 void CSprite::TexReverse()
 {
 	int i ;
@@ -129,17 +153,17 @@ void CSprite::TexReverse()
 		m_tv[i] = tv[i] ;
 	}
 
-	SPRITE_VERTEX* pVertices;
+	SPRITE_VERTEX* pVertices ;
 	if( FAILED( m_pVB->Lock( 0, sizeof(SPRITE_VERTEX), (void**)&pVertices, 0 ) ) )
 		return;
 
 	for(i=0; i<4; i++)
 	{
-		pVertices[i].tu = tu[i] ;
-		pVertices[i].tv = tv[i] ;
+		pVertices[i].tu = m_tu[i] ;
+		pVertices[i].tv = m_tv[i] ;
 	}
 
-	m_pVB->Unlock();
+	m_pVB->Unlock() ;
 }
 
 void CSprite::SetCenterPoint(float CenterX, float CenterY)
@@ -190,9 +214,9 @@ HRESULT CSprite::InitVB()
 		return E_FAIL;
 	}
 
-	SPRITE_VERTEX* pVertices;
+	SPRITE_VERTEX* pVertices ;
 	if( FAILED( m_pVB->Lock( 0, sizeof(SPRITE_VERTEX), (void**)&pVertices, 0 ) ) )
-		return E_FAIL;
+		return E_FAIL ;
 
 	float Width_Half = m_fWidth / 2.0f ;
 	float Height_Half = m_fHeight / 2.0f ;
@@ -225,7 +249,7 @@ HRESULT CSprite::InitVB()
 	pVertices[3].tu = m_tu[3] ;
 	pVertices[3].tv = m_tv[3] ;
 
-	m_pVB->Unlock();
+	m_pVB->Unlock() ;
 
 	return true ;
 }
@@ -233,7 +257,7 @@ HRESULT CSprite::InitVB()
 bool CSprite::SetTexture(char *texfile)
 {
 	if( FAILED( D3DXCreateTextureFromFileEx( pd3dDevice, texfile, D3DX_DEFAULT_NONPOW2, D3DX_DEFAULT_NONPOW2, 1, NULL,
-		D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_NONE,D3DX_FILTER_NONE, NULL, NULL, NULL, &m_pTexture ) ) )
+		D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_NONE,D3DX_FILTER_NONE, NULL, &m_pTexInfo, NULL, &m_pTexture ) ) )
 	{
 		char str[1024] ;
 		sprintf(str, "Could not find %s Texture File", texfile) ;
