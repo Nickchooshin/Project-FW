@@ -7,6 +7,7 @@ private :
 	LPDIRECT3DVERTEXBUFFER9	m_pVB ;
 	LPDIRECT3DINDEXBUFFER9	m_pIB ;
 	LPDIRECT3DTEXTURE9		m_pTexture ;
+	D3DXIMAGE_INFO			*m_pTexInfo ;
 
 	float m_fWidth, m_fHeight ;
 	float m_fX, m_fY ;
@@ -16,8 +17,6 @@ private :
 	int m_R, m_G, m_B ;
 	int m_nAlpha ;
 	float m_tu[4], m_tv[4] ;
-
-	D3DXIMAGE_INFO m_TexInfo ;
 
 public :
 	CSprite() ;

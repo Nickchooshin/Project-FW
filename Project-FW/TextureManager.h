@@ -11,6 +11,7 @@ class TextureManager : public Singleton<TextureManager>
 {
 private :
 	map<string, LPDIRECT3DTEXTURE9> m_Texture ;
+	map<string, D3DXIMAGE_INFO> m_TexInfo ;
 public :
 	LPDIRECT3DDEVICE9 pd3dDevice ;
 
@@ -18,7 +19,7 @@ public :
 	TextureManager() ;
 	~TextureManager() ;
 
-	LPDIRECT3DTEXTURE9 GetTexture(string texfile, D3DXIMAGE_INFO *pTexInfo) ;
+	LPDIRECT3DTEXTURE9 GetTexture(string texfile, D3DXIMAGE_INFO **pTexInfo) ;
 } ;
 
 #define g_TextureManager TextureManager::GetInstance()
