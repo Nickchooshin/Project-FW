@@ -14,7 +14,7 @@ private :
 	int m_nAlpha ;
 	float m_tu[4], m_tv[4] ;
 
-	D3DXIMAGE_INFO m_TexInfo ;
+	D3DXIMAGE_INFO *m_pTexInfo ;
 
 public :
 	CUISprite() ;

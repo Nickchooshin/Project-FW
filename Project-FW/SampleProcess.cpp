@@ -10,7 +10,7 @@
 
 const int sprite_max=1000 ;
 
-CSprite Sprite ;
+CSprite Sprite, Sprite2 ;
 CUISprite UISprite ;
 CCamera Camera ;
 
@@ -34,6 +34,8 @@ void SampleProcess::Init()
 	Sprite.SetTextureUV(0.0f, 0.0f, 50.0f, 50.0f) ;
 	//UISprite.Init(60.0f, 80.0f, "sample_texture2.png") ;
 	UISprite.Init("sample_texture2.png") ;
+
+	Sprite2.Init("sample_texture2.png") ;
 }
 
 void SampleProcess::Destroy()
@@ -113,6 +115,7 @@ void SampleProcess::Update(float dt)
 	}*/
 
 	Sprite.SetXY(x, y) ;
+	Sprite2.SetXY(100.0f, 100.0f) ;
 	UISprite.SetXY(100.0f, 100.0f) ;
 }
 
@@ -122,4 +125,5 @@ void SampleProcess::Render()
 
 	Sprite.Render() ;
 	UISprite.Render() ;
+	Sprite2.Render() ;
 }

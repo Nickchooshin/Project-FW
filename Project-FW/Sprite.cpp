@@ -4,7 +4,7 @@
 
 CSprite::CSprite() : m_pVB(NULL),
 					 m_pIB(NULL),
-					 m_pTexture(NULL),
+					 m_pTexture(NULL), m_pTexInfo(NULL),
 					 m_fWidth(0.0f), m_fHeight(0.0f),
 					 m_fX(0.0f), m_fY(0.0f),
 					 m_fCenterX(0.0f), m_fCenterY(0.0f),
@@ -34,8 +34,8 @@ bool CSprite::Init(char *texfile)
 	if(!SetTexture(texfile))
 		return false ;
 
-	m_fWidth = (float)m_TexInfo.Width ;
-	m_fHeight = (float)m_TexInfo.Height ;
+	m_fWidth = (float)m_pTexInfo->Width ;
+	m_fHeight = (float)m_pTexInfo->Height ;
 
 	if(FAILED(InitVB()))
 		return false ;
@@ -105,10 +105,8 @@ void CSprite::SetRGB(int R, int G, int B)
 	if( FAILED( m_pVB->Lock( 0, sizeof(SPRITE_VERTEX), (void**)&pVertices, 0 ) ) )
 		return;
 
-	pVertices[0].color = D3DCOLOR_XRGB(m_R, m_G, m_B) ;
-	pVertices[1].color = D3DCOLOR_XRGB(m_R, m_G, m_B) ;
-	pVertices[2].color = D3DCOLOR_XRGB(m_R, m_G, m_B) ;
-	pVertices[3].color = D3DCOLOR_XRGB(m_R, m_G, m_B) ;
+	for(int i=0; i<4; i++)
+		pVertices[i].color = D3DCOLOR_XRGB(m_R, m_G, m_B) ;
 
 	m_pVB->Unlock();
 }
@@ -120,9 +118,8 @@ void CSprite::SetAlpha(int Alpha)
 
 void CSprite::SetTextureUV(float u1, float v1, float u2, float v2)
 {
-	int i ;
-	float Width = (float)m_TexInfo.Width ;
-	float Height = (float)m_TexInfo.Height ;
+	float Width = (float)m_pTexInfo->Width ;
+	float Height = (float)m_pTexInfo->Height ;
 
 	m_tu[0] = u1/Width ;	m_tv[0] = v1/Height ;
 	m_tu[1] = u2/Width ;	m_tv[1] = v1/Height ;
@@ -133,7 +130,7 @@ void CSprite::SetTextureUV(float u1, float v1, float u2, float v2)
 	if( FAILED( m_pVB->Lock( 0, sizeof(SPRITE_VERTEX), (void**)&pVertices, 0 ) ) )
 		return ;
 
-	for(i=0; i<4; i++)
+	for(int i=0; i<4; i++)
 	{
 		pVertices[i].tu = m_tu[i] ;
 		pVertices[i].tv = m_tv[i] ;
@@ -264,7 +261,7 @@ HRESULT CSprite::InitVB()
 
 bool CSprite::SetTexture(char *texfile)
 {
-	m_pTexture = g_TextureManager->GetTexture(texfile, &m_TexInfo) ;
+	m_pTexture = g_TextureManager->GetTexture(texfile, &m_pTexInfo) ;
 
 	if(m_pTexture!=NULL)
 		return true ;
