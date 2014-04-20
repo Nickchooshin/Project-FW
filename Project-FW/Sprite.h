@@ -10,7 +10,7 @@ private :
 	D3DXIMAGE_INFO			*m_pTexInfo ;
 
 	float m_fWidth, m_fHeight ;
-	float m_fX, m_fY ;
+	float m_fX, m_fY, m_fZ ;
 	float m_fCenterX, m_fCenterY ;
 	float m_fScaleX, m_fScaleY ;
 	float m_fAngle[3] ;
@@ -26,6 +26,7 @@ public :
 	bool Init(float Width, float Height, char *texfile) ;
 
 	void SetXY(float X, float Y) ;								// 좌표설정 (중앙 기준)
+	void SetZ(float Z) ;										// Z축 좌표설정
 	void SetCenterPoint(float CenterX, float CenterY) ;			// 중심점 설정
 	void SetScale(float ScaleX, float ScaleY) ;					// 확대, 축소
 	void SetAngle(float Angle, char Direction='z') ;			// 각도 설정 (반시계방향)

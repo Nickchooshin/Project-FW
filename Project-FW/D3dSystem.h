@@ -20,6 +20,7 @@ public :
 
 	bool BeginScene() ;
 	void EndScene() ;
+	void Present() ;
 private :
 	void SetRenderState() ;
 } ;

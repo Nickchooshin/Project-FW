@@ -6,7 +6,7 @@ CSprite::CSprite() : m_pVB(NULL),
 					 m_pIB(NULL),
 					 m_pTexture(NULL), m_pTexInfo(NULL),
 					 m_fWidth(0.0f), m_fHeight(0.0f),
-					 m_fX(0.0f), m_fY(0.0f),
+					 m_fX(0.0f), m_fY(0.0f), m_fZ(0.0f),
 					 m_fCenterX(0.0f), m_fCenterY(0.0f),
 					 m_fScaleX(1.0f), m_fScaleY(1.0f),
 					 m_R(255), m_G(255), m_B(255),
@@ -62,6 +62,11 @@ void CSprite::SetXY(float X, float Y)
 
 	m_fX = (float)((int) (X + 0.5f) ) ;
 	m_fY = (float)((int) (Y + 0.5f) ) ;
+}
+
+void CSprite::SetZ(float Z)
+{
+	m_fZ = Z ;
 }
 
 void CSprite::SetAngle(float Angle, char Direction)
@@ -196,6 +201,10 @@ void CSprite::Render()
 	//g_pd3dDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR) ;
 	//
 
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE) ;			// Z 버퍼 ON
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE,TRUE) ;
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZFUNC,D3DCMP_LESSEQUAL ) ;
+
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE ) ; // 알파 블렌딩 ON
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA ) ;
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA ) ;
@@ -276,7 +285,7 @@ void CSprite::SetupMatrices()
 	D3DXMatrixRotationZ(&matX, m_fAngle[0]) ;
 	D3DXMatrixRotationZ(&matY, m_fAngle[1]) ;
 	D3DXMatrixRotationZ(&matZ, m_fAngle[2]) ;
-	D3DXMatrixTranslation( &matT, m_fX, m_fY, 0.0f ) ;
+	D3DXMatrixTranslation( &matT, m_fX, m_fY, m_fZ ) ;
 	D3DXMatrixTranslation( &matT2, m_fCenterX, m_fCenterY, 0.0f) ;
 	D3DXMatrixScaling( &matS, m_fScaleX, m_fScaleY, 0.0f ) ;
 
