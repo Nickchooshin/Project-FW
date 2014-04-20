@@ -11,7 +11,7 @@
 const int sprite_max=1000 ;
 
 CSprite Sprite, Sprite2 ;
-CUISprite UISprite ;
+CUISprite UISprite, UISprite2 ;
 CCamera Camera ;
 
 SampleProcess::SampleProcess()
@@ -32,10 +32,11 @@ void SampleProcess::Init()
 {
 	Sprite.Init(50.0f, 50.0f, "sample_texture.png") ;
 	Sprite.SetTextureUV(0.0f, 0.0f, 50.0f, 50.0f) ;
-	//UISprite.Init(60.0f, 80.0f, "sample_texture2.png") ;
+	UISprite.Init(60.0f, 80.0f, "sample_texture2.png") ;
 	UISprite.Init("sample_texture2.png") ;
 
 	Sprite2.Init("sample_texture2.png") ;
+	UISprite2.Init("sample_texture2.png") ;
 }
 
 void SampleProcess::Destroy()
@@ -84,6 +85,19 @@ void SampleProcess::Update(float dt)
 		Sprite.SetTextureUV(50.0f, 50.0f, 100.0f, 100.0f) ;
 	}
 
+	if(g_Keyboard->IsButtonDown(DIK_8))
+	{
+		Sprite.SetZ(-1.0f) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_9))
+	{
+		Sprite.SetZ(1.0f) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_0))
+	{
+		Sprite.SetZ(0.0f) ;
+	}
+
 	/*if(g_Mouse->IsMouse(g_Mouse->LBUTTON_DOWN))
 	{
 		MessageBox(NULL, "LBUTTON_DOWN", "LBUTTON_DOWN", MB_OK) ;
@@ -117,13 +131,15 @@ void SampleProcess::Update(float dt)
 	Sprite.SetXY(x, y) ;
 	Sprite2.SetXY(100.0f, 100.0f) ;
 	UISprite.SetXY(100.0f, 100.0f) ;
+	UISprite2.SetXY(50.0f, 50.0f) ;
 }
 
 void SampleProcess::Render()
 {
 	Camera.Run() ;
-
+	
 	Sprite.Render() ;
 	UISprite.Render() ;
 	Sprite2.Render() ;
+	UISprite2.Render() ;
 }

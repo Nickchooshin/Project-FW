@@ -116,6 +116,8 @@ void CWinSystem::Render()
 
 		D3dSystem.EndScene() ;
 	}
+
+	D3dSystem.Present() ;
 }
 
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
