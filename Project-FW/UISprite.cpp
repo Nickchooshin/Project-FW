@@ -80,6 +80,18 @@ void CUISprite::SetXY(float X, float Y)
 	m_pVB->Unlock() ;
 }
 
+void CUISprite::SetZ(float Z)
+{
+	UISPRITE_VERTEX* pVertices ;
+	if( FAILED( m_pVB->Lock( 0, sizeof(UISPRITE_VERTEX), (void**)&pVertices, 0 ) ) )
+		return ;
+
+	for(int i=0; i<4; i++)
+		pVertices[i].z = Z ;
+
+	m_pVB->Unlock() ;
+}
+
 void CUISprite::SetRGB(int R, int G, int B)
 {
 	m_R = R ;
@@ -166,10 +178,6 @@ void CUISprite::Render()
 	g_TextureManager->pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
 	g_TextureManager->pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG2, D3DTA_TFACTOR );
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_TEXTUREFACTOR, D3DCOLOR_ARGB( m_nAlpha, 0, 0, 0 ) );		// m_Alpha 값이 알파채널
-
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE) ;			// Z 버퍼 ON
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE,TRUE) ;
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZFUNC,D3DCMP_LESSEQUAL ) ;
 
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE ) ; // 알파 블렌딩 ON
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA ) ;
