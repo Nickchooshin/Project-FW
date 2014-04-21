@@ -256,7 +256,7 @@ HRESULT CSprite::InitVB()
 	pVertices[2].tu = m_tu[2] ;
 	pVertices[2].tv = m_tv[2] ;
 
-	pVertices[3].x = (Width_Half) - 0.5f ;
+	pVertices[3].x = Width_Half - 0.5f ;
 	pVertices[3].y = -(Height_Half) - 0.5f ;
 	pVertices[3].color = D3DCOLOR_XRGB(m_R, m_G, m_B) ;
 	pVertices[3].z = 0.0f ;
