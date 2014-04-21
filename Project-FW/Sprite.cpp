@@ -192,14 +192,14 @@ void CSprite::Render()
 	g_TextureManager->pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
 	g_TextureManager->pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG2, D3DTA_TFACTOR );
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_TEXTUREFACTOR, D3DCOLOR_ARGB( m_nAlpha, 0, 0, 0 ) );		// m_Alpha 값이 알파채널
-	//g_pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
-	//g_pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	//g_pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);	// 정점색에 있는 Alpha 채널을 값으로 알파조정 ex) pVertices[3].color = D3DCOLOR_ARGB(m_Alpha, m_R, m_G, m_B) ;
 
-	//
 	//g_pd3dDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR) ;
 	//g_pd3dDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR) ;
-	//
+
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE) ;			// Z 버퍼 ON
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE) ;
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL ) ;
 
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE ) ; // 알파 블렌딩 ON
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA ) ;
@@ -211,10 +211,8 @@ void CSprite::Render()
 
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE ) ; // 알파 블렌딩 OFF
 
-	//pd3dDevice->SetStreamSource( 0, m_pVB, 0, sizeof(CUSTOMVERTEX) );
-	//pd3dDevice->SetFVF( D3DFVF_CUSTOMVERTEX );
-	//pd3dDevice->SetIndices( m_pIB );
-	//pd3dDevice->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2 );
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE) ;			// Z 버퍼 OFF
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE) ;
 }
 
 HRESULT CSprite::InitVB()

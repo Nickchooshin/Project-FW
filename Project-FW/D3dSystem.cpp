@@ -87,10 +87,6 @@ LPDIRECT3DDEVICE9 CD3dSystem::GetDevice()
 
 bool CD3dSystem::BeginScene()
 {
-	m_pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE) ;			// Z 버퍼 ON
-	m_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE) ;
-	//m_pd3dDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL ) ;
-
 	m_pd3dDevice->Clear( 0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0 ); // D3DCOLOR_XRGB
 
 	return SUCCEEDED( m_pd3dDevice->BeginScene() ) ;
@@ -103,9 +99,6 @@ void CD3dSystem::EndScene()
 
 void CD3dSystem::Present()
 {
-	m_pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE) ;			// Z 버퍼 OFF
-	m_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE) ;
-
 	m_pd3dDevice->Present( NULL, NULL, NULL, NULL ) ;
 }
 
