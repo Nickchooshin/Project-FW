@@ -98,6 +98,22 @@ void SampleProcess::Update(float dt)
 		Sprite.SetZ(0.0f) ;
 	}
 
+	if(g_Keyboard->IsButtonDown(DIK_5))
+	{
+		UISprite.SetZ(0.0f) ;
+		UISprite2.SetZ(0.0f) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_6))
+	{
+		UISprite.SetZ(1.0f) ;
+		UISprite2.SetZ(0.0f) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_7))
+	{
+		UISprite.SetZ(0.0f) ;
+		UISprite2.SetZ(1.0f) ;
+	}
+
 	/*if(g_Mouse->IsMouse(g_Mouse->LBUTTON_DOWN))
 	{
 		MessageBox(NULL, "LBUTTON_DOWN", "LBUTTON_DOWN", MB_OK) ;

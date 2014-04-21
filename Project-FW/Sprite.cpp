@@ -201,10 +201,6 @@ void CSprite::Render()
 	//g_pd3dDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR) ;
 	//
 
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE) ;			// Z 버퍼 ON
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE,TRUE) ;
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZFUNC,D3DCMP_LESSEQUAL ) ;
-
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE ) ; // 알파 블렌딩 ON
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA ) ;
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA ) ;

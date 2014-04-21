@@ -24,6 +24,7 @@ public :
 	bool Init(float Width, float Height, char *texfile) ;
 
 	void SetXY(float X, float Y) ;						// 좌표설정 (중앙 기준)
+	void SetZ(float Z) ;								// Z축 좌표설정
 	void SetRGB(int R, int G, int B) ;					// RGB값 설정
 	void SetAlpha(int Alpha) ;							// 알파값 설정 0~255
 	
