@@ -179,6 +179,10 @@ void CUISprite::Render()
 	g_TextureManager->pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG2, D3DTA_TFACTOR );
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_TEXTUREFACTOR, D3DCOLOR_ARGB( m_nAlpha, 0, 0, 0 ) );		// m_Alpha 값이 알파채널
 
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE) ;			// Z 버퍼 ON
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE) ;
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL ) ;
+
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE ) ; // 알파 블렌딩 ON
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA ) ;
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA ) ;
@@ -188,6 +192,9 @@ void CUISprite::Render()
 	g_TextureManager->pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2) ;
 
 	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE ) ; // 알파 블렌딩 OFF
+
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE) ;			// Z 버퍼 OFF
+	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE) ;
 }
 
 HRESULT CUISprite::InitVB()
