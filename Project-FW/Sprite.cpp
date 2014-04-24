@@ -6,7 +6,7 @@ CSprite::CSprite() : m_pVB(NULL),
 					 m_pIB(NULL),
 					 m_pTexture(NULL), m_pTexInfo(NULL),
 					 m_fWidth(0.0f), m_fHeight(0.0f),
-					 m_fX(0.0f), m_fY(0.0f), m_fZ(0.0f),
+					 m_Position(0.0f, 0.0f, 0.0f),
 					 m_fCenterX(0.0f), m_fCenterY(0.0f),
 					 m_fScaleX(1.0f), m_fScaleY(1.0f),
 					 m_R(255), m_G(255), m_B(255),
@@ -54,19 +54,19 @@ bool CSprite::Init(float Width, float Height, char *texfile)
 	return true ;
 }
 
-void CSprite::SetXY(float X, float Y)
+void CSprite::SetPosition(float X, float Y)
 {
 	// 소수점 단위로 설정하면, 텍셀과 픽셀의 위치가 어긋나기 때문에
 	// 화면상에서 픽셀이 일그러져 보이는 경우가 생긴다.
 	// 이를 위해, 불필요한 소수점을 제거하기 위해 정수형에 맞춰 반올림 해준다.
 
-	m_fX = (float)((int) (X + 0.5f) ) ;
-	m_fY = (float)((int) (Y + 0.5f) ) ;
+	m_Position.x = (float)((int) (X + 0.5f) ) ;
+	m_Position.y = (float)((int) (Y + 0.5f) ) ;
 }
 
-void CSprite::SetZ(float Z)
+void CSprite::SetPositionZ(float Z)
 {
-	m_fZ = Z ;
+	m_Position.y = Z ;
 }
 
 void CSprite::SetAngle(float Angle, char Direction)
@@ -279,7 +279,7 @@ void CSprite::SetupMatrices()
 	D3DXMatrixRotationZ(&matX, m_fAngle[0]) ;
 	D3DXMatrixRotationZ(&matY, m_fAngle[1]) ;
 	D3DXMatrixRotationZ(&matZ, m_fAngle[2]) ;
-	D3DXMatrixTranslation( &matT, m_fX, m_fY, m_fZ ) ;
+	D3DXMatrixTranslation( &matT, m_Position.x, m_Position.y, m_Position.y ) ;
 	D3DXMatrixTranslation( &matT2, m_fCenterX, m_fCenterY, 0.0f) ;
 	D3DXMatrixScaling( &matS, m_fScaleX, m_fScaleY, 0.0f ) ;
 

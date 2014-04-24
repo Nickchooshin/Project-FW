@@ -6,7 +6,7 @@ CUISprite::CUISprite() : m_pVB(NULL),
 						 m_pIB(NULL),
 						 m_pTexture(NULL),
 						 m_fWidth(0.0f), m_fHeight(0.0f),
-						 m_fX(0.0f), m_fY(0.0f),
+						 m_Position(0.0f, 0.0f),
 						 m_R(255), m_G(255), m_B(255),
 						 m_nAlpha(255)
 {
@@ -49,14 +49,14 @@ bool CUISprite::Init(float Width, float Height, char *texfile)
 	return true ;
 }
 
-void CUISprite::SetXY(float X, float Y)
+void CUISprite::SetPosition(float X, float Y)
 {
 	// 소수점 단위로 설정하면, 텍셀과 픽셀의 위치가 어긋나기 때문에
 	// 화면상에서 픽셀이 일그러져 보이는 경우가 생긴다.
 	// 이를 위해, 불필요한 소수점을 제거하기 위해 정수형에 맞춰 반올림 해준다.
 
-	m_fX = (float)((int) (X + 0.5f) ) ;
-	m_fY = (float)((int) (Y + 0.5f) ) ;
+	m_Position.x = (float)((int) (X + 0.5f) ) ;
+	m_Position.y = (float)((int) (Y + 0.5f) ) ;
 
 	UISPRITE_VERTEX* pVertices ;
 	if( FAILED( m_pVB->Lock( 0, sizeof(UISPRITE_VERTEX), (void**)&pVertices, 0 ) ) )
@@ -65,22 +65,22 @@ void CUISprite::SetXY(float X, float Y)
 	float Width_Half = m_fWidth / 2.0f ;
 	float Height_Half = m_fHeight / 2.0f ;
 
-	pVertices[0].x = -(Width_Half) + m_fX - 0.5f ;
-	pVertices[0].y = -(Height_Half) + m_fY - 0.5f ;
+	pVertices[0].x = -(Width_Half) + m_Position.x - 0.5f ;
+	pVertices[0].y = -(Height_Half) + m_Position.y - 0.5f ;
 
-	pVertices[1].x = Width_Half + m_fX - 0.5f ;
-	pVertices[1].y = -(Height_Half) + m_fY - 0.5f ;
+	pVertices[1].x = Width_Half + m_Position.x - 0.5f ;
+	pVertices[1].y = -(Height_Half) + m_Position.y - 0.5f ;
 
-	pVertices[2].x = -(Width_Half) + m_fX - 0.5f ;
-	pVertices[2].y = Height_Half + m_fY - 0.5f ;
+	pVertices[2].x = -(Width_Half) + m_Position.x - 0.5f ;
+	pVertices[2].y = Height_Half + m_Position.y - 0.5f ;
 
-	pVertices[3].x = Width_Half + m_fX - 0.5f ;
-	pVertices[3].y = Height_Half + m_fY - 0.5f ;
+	pVertices[3].x = Width_Half + m_Position.x - 0.5f ;
+	pVertices[3].y = Height_Half + m_Position.y - 0.5f ;
 
 	m_pVB->Unlock() ;
 }
 
-void CUISprite::SetZ(float Z)
+void CUISprite::SetPositionZ(float Z)
 {
 	UISPRITE_VERTEX* pVertices ;
 	if( FAILED( m_pVB->Lock( 0, sizeof(UISPRITE_VERTEX), (void**)&pVertices, 0 ) ) )
