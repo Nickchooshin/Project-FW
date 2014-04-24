@@ -9,7 +9,7 @@ private :
 	LPDIRECT3DTEXTURE9		m_pTexture ;
 
 	float m_fWidth, m_fHeight ;
-	float m_fX, m_fY ;
+	D3DXVECTOR2 m_Position ;
 	int m_R, m_G, m_B ;
 	int m_nAlpha ;
 	float m_tu[4], m_tv[4] ;
@@ -23,8 +23,8 @@ public :
 	bool Init(char *texfile) ;
 	bool Init(float Width, float Height, char *texfile) ;
 
-	void SetXY(float X, float Y) ;						// ÁÂÇ¥¼³Á¤ (Áß¾Ó ±âÁØ)
-	void SetZ(float Z) ;								// ZÃà ÁÂÇ¥¼³Á¤
+	void SetPosition(float X, float Y) ;				// ÁÂÇ¥¼³Á¤ (Áß¾Ó ±âÁØ)
+	void SetPositionZ(float Z) ;						// ZÃà ÁÂÇ¥¼³Á¤
 	void SetRGB(int R, int G, int B) ;					// RGB°ª ¼³Á¤
 	void SetAlpha(int Alpha) ;							// ¾ËÆÄ°ª ¼³Á¤ 0~255
 	
