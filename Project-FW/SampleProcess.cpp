@@ -87,31 +87,31 @@ void SampleProcess::Update(float dt)
 
 	if(g_Keyboard->IsButtonDown(DIK_8))
 	{
-		Sprite.SetZ(-1.0f) ;
+		Sprite.SetPositionZ(0.0f) ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_9))
 	{
-		Sprite.SetZ(1.0f) ;
+		Sprite.SetPositionZ(1.0f) ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_0))
 	{
-		Sprite.SetZ(0.0f) ;
+		Sprite.SetPositionZ(0.5f) ;
 	}
 
 	if(g_Keyboard->IsButtonDown(DIK_5))
 	{
-		UISprite.SetZ(0.0f) ;
-		UISprite2.SetZ(0.0f) ;
+		UISprite.SetPositionZ(0.0f) ;
+		UISprite2.SetPositionZ(0.0f) ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_6))
 	{
-		UISprite.SetZ(1.0f) ;
-		UISprite2.SetZ(0.0f) ;
+		UISprite.SetPositionZ(1.0f) ;
+		UISprite2.SetPositionZ(0.0f) ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_7))
 	{
-		UISprite.SetZ(0.0f) ;
-		UISprite2.SetZ(1.0f) ;
+		UISprite.SetPositionZ(0.0f) ;
+		UISprite2.SetPositionZ(1.0f) ;
 	}
 
 	/*if(g_Mouse->IsMouse(g_Mouse->LBUTTON_DOWN))
@@ -144,10 +144,10 @@ void SampleProcess::Update(float dt)
 		MessageBox(NULL, "POV ก็", "POV ก็", MB_OK) ;
 	}*/
 
-	Sprite.SetXY(x, y) ;
-	Sprite2.SetXY(100.0f, 100.0f) ;
-	UISprite.SetXY(100.0f, 100.0f) ;
-	UISprite2.SetXY(50.0f, 50.0f) ;
+	Sprite.SetPosition(x, y) ;
+	Sprite2.SetPosition(100.0f, 100.0f) ;
+	UISprite.SetPosition(100.0f, 100.0f) ;
+	UISprite2.SetPosition(50.0f, 50.0f) ;
 }
 
 void SampleProcess::Render()

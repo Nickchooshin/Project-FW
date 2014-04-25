@@ -6,7 +6,7 @@ CSprite::CSprite() : m_pVB(NULL),
 					 m_pIB(NULL),
 					 m_pTexture(NULL), m_pTexInfo(NULL),
 					 m_fWidth(0.0f), m_fHeight(0.0f),
-					 m_Position(0.0f, 0.0f, 0.0f),
+					 m_Position(0.0f, 0.0f, 0.5f),
 					 m_fCenterX(0.0f), m_fCenterY(0.0f),
 					 m_fScaleX(1.0f), m_fScaleY(1.0f),
 					 m_R(255), m_G(255), m_B(255),
@@ -66,7 +66,7 @@ void CSprite::SetPosition(float X, float Y)
 
 void CSprite::SetPositionZ(float Z)
 {
-	m_Position.y = Z ;
+	m_Position.z = Z ;
 }
 
 void CSprite::SetAngle(float Angle, char Direction)
@@ -279,7 +279,7 @@ void CSprite::SetupMatrices()
 	D3DXMatrixRotationZ(&matX, m_fAngle[0]) ;
 	D3DXMatrixRotationZ(&matY, m_fAngle[1]) ;
 	D3DXMatrixRotationZ(&matZ, m_fAngle[2]) ;
-	D3DXMatrixTranslation( &matT, m_Position.x, m_Position.y, m_Position.y ) ;
+	D3DXMatrixTranslation( &matT, m_Position.x, m_Position.y, m_Position.z ) ;
 	D3DXMatrixTranslation( &matT2, m_fCenterX, m_fCenterY, 0.0f) ;
 	D3DXMatrixScaling( &matS, m_fScaleX, m_fScaleY, 0.0f ) ;
 
