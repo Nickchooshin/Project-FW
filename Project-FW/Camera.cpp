@@ -4,7 +4,7 @@ LPDIRECT3DDEVICE9 CCamera::pd3dDevice = NULL ;
 float CCamera::WinWidth = 0.0f ;
 float CCamera::WinHeight = 0.0f ;
 
-CCamera::CCamera() : m_Position(0.0f, 0.0f)
+CCamera::CCamera() : m_Position(0.0f, 0.0f, 0.0f)
 {
 }
 CCamera::~CCamera()

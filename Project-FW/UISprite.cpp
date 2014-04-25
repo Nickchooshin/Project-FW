@@ -6,7 +6,7 @@ CUISprite::CUISprite() : m_pVB(NULL),
 						 m_pIB(NULL),
 						 m_pTexture(NULL),
 						 m_fWidth(0.0f), m_fHeight(0.0f),
-						 m_Position(0.0f, 0.0f),
+						 m_Position(0.0f, 0.0f, 0.0f),
 						 m_R(255), m_G(255), m_B(255),
 						 m_nAlpha(255)
 {

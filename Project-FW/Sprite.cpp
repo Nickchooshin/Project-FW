@@ -7,7 +7,7 @@ CSprite::CSprite() : m_pVB(NULL),
 					 m_pTexture(NULL), m_pTexInfo(NULL),
 					 m_fWidth(0.0f), m_fHeight(0.0f),
 					 m_Position(0.0f, 0.0f, 0.5f),
-					 m_fCenterX(0.0f), m_fCenterY(0.0f),
+					 m_CenterPosition(0.0f, 0.0f, 0.0f),
 					 m_fScaleX(1.0f), m_fScaleY(1.0f),
 					 m_R(255), m_G(255), m_B(255),
 					 m_nAlpha(255)
@@ -67,6 +67,12 @@ void CSprite::SetPosition(float X, float Y)
 void CSprite::SetPositionZ(float Z)
 {
 	m_Position.z = Z ;
+}
+
+void CSprite::SetCenterPosition(float CenterX, float CenterY)
+{
+	m_CenterPosition.x = CenterX ;
+	m_CenterPosition.y = CenterY ;
 }
 
 void CSprite::SetAngle(float Angle, char Direction)
@@ -176,12 +182,6 @@ void CSprite::TexReverse()
 	m_pVB->Unlock() ;
 }
 
-void CSprite::SetCenterPoint(float CenterX, float CenterY)
-{
-	m_fCenterX = CenterX ;
-	m_fCenterY = CenterY ;
-}
-
 void CSprite::Render()
 {
 	SetupMatrices() ;
@@ -280,7 +280,7 @@ void CSprite::SetupMatrices()
 	D3DXMatrixRotationZ(&matY, m_fAngle[1]) ;
 	D3DXMatrixRotationZ(&matZ, m_fAngle[2]) ;
 	D3DXMatrixTranslation( &matT, m_Position.x, m_Position.y, m_Position.z ) ;
-	D3DXMatrixTranslation( &matT2, m_fCenterX, m_fCenterY, 0.0f) ;
+	D3DXMatrixTranslation( &matT2, m_CenterPosition.x, m_CenterPosition.y, 0.0f) ;
 	D3DXMatrixScaling( &matS, m_fScaleX, m_fScaleY, 0.0f ) ;
 
 	matWorld = matWorld * matT2 * matX * matY * matZ * matT ;
