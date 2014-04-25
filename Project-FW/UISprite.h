@@ -9,7 +9,7 @@ private :
 	LPDIRECT3DTEXTURE9		m_pTexture ;
 
 	float m_fWidth, m_fHeight ;
-	D3DXVECTOR2 m_Position ;
+	D3DXVECTOR3 m_Position ;
 	int m_R, m_G, m_B ;
 	int m_nAlpha ;
 	float m_tu[4], m_tv[4] ;

@@ -4,7 +4,7 @@
 class CCamera
 {
 private :
-	D3DXVECTOR2 m_Position ;
+	D3DXVECTOR3 m_Position ;
 public :
 	static LPDIRECT3DDEVICE9 pd3dDevice ;
 	static float WinWidth, WinHeight ;
