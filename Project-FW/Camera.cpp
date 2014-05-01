@@ -4,7 +4,7 @@ LPDIRECT3DDEVICE9 CCamera::pd3dDevice = NULL ;
 float CCamera::WinWidth = 0.0f ;
 float CCamera::WinHeight = 0.0f ;
 
-CCamera::CCamera() : m_Position(0.0f, 0.0f, 0.0f)
+CCamera::CCamera() : m_Position(WinWidth/2, WinHeight/2, 0.0f)
 {
 }
 CCamera::~CCamera()
@@ -32,7 +32,6 @@ void CCamera::Run()
 
 	D3DXMATRIXA16 matProj;
 	D3DXMatrixOrthoLH(&matProj, WinWidth, WinHeight, 0.0f, 1.0f) ;	// 카메라의 위치로부터 zn~zf 까지의 클리핑 영역이 지정되는 듯 함
-	//D3DXMatrixOrthoOffCenterLH(&matProj, 0.0f, WinWidth, WinHeight, 0.0f, 0.0f, 1.0f) ;
 	//D3DXMatrixOrthoOffCenterLH(&matProj, 0.0f, WinWidth, 0.0f, WinHeight, 0.0f, 1.0f) ;
 	pd3dDevice->SetTransform( D3DTS_PROJECTION, &matProj ) ;
 }
