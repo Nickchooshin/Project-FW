@@ -36,6 +36,9 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SampleProcess.h" />
@@ -78,6 +81,9 @@
     </ClInclude>
     <ClInclude Include="D3dDevice.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
