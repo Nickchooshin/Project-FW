@@ -23,7 +23,7 @@ void CCamera::Run()
 	const float WinHeight = (float)g_D3dDevice->GetWinHeight() ;
 
 	D3DXMATRIXA16 matWorld ;
-	D3DXMatrixIdentity( &matWorld );
+	D3DXMatrixIdentity( &matWorld ) ;
 	pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld ) ;
 
 	D3DXVECTOR3 vEyePt( m_Position.x, m_Position.y, 0.0f ) ;	// 카메라의 위치
