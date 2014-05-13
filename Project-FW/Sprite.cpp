@@ -1,6 +1,6 @@
 #include "Sprite.h"
+#include "D3dDevice.h"
 #include "TextureManager.h"
-#include <stdio.h>
 
 CSprite::CSprite() : m_pVB(NULL),
 					 m_pIB(NULL),
@@ -184,40 +184,44 @@ void CSprite::TexReverse()
 
 void CSprite::Render()
 {
+	const LPDIRECT3DDEVICE9 pd3dDevice = g_D3dDevice->GetDevice() ;
+
 	SetupMatrices() ;
 
-	g_TextureManager->pd3dDevice->SetTexture( 0, m_pTexture ) ;
+	pd3dDevice->SetTexture( 0, m_pTexture ) ;
 
-	g_TextureManager->pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE );
-	g_TextureManager->pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
-	g_TextureManager->pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG2, D3DTA_TFACTOR );
-	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_TEXTUREFACTOR, D3DCOLOR_ARGB( m_nAlpha, 0, 0, 0 ));	// 텍스쳐를 해당 수치만큼 밝게 한다
+	pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE );
+	pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
+	pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG2, D3DTA_TFACTOR );
+	pd3dDevice->SetRenderState( D3DRS_TEXTUREFACTOR, D3DCOLOR_ARGB( m_nAlpha, 0, 0, 0 ));	// 텍스쳐를 해당 수치만큼 밝게 한다
 	//g_pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);	// 정점색에 있는 Alpha 채널을 값으로 알파조정 ex) pVertices[3].color = D3DCOLOR_ARGB(m_Alpha, m_R, m_G, m_B) ;
 
 	//g_pd3dDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR) ;
 	//g_pd3dDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR) ;
 
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE) ;			// Z 버퍼 ON
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE) ;
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL ) ;
+	pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE) ;			// Z 버퍼 ON
+	pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE) ;
+	pd3dDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL ) ;
 
-	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE ) ; // 알파 블렌딩 ON
-	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA ) ;
-	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA ) ;
+	pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE ) ; // 알파 블렌딩 ON
+	pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA ) ;
+	pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA ) ;
 
-	g_TextureManager->pd3dDevice->SetStreamSource( 0, m_pVB, 0, sizeof(SPRITE_VERTEX) );
-	g_TextureManager->pd3dDevice->SetFVF( D3DFVF_SPRITE_VERTEX );
-	g_TextureManager->pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2) ;
+	pd3dDevice->SetStreamSource( 0, m_pVB, 0, sizeof(SPRITE_VERTEX) );
+	pd3dDevice->SetFVF( D3DFVF_SPRITE_VERTEX );
+	pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2) ;
 
-	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE ) ; // 알파 블렌딩 OFF
+	pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE ) ; // 알파 블렌딩 OFF
 
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE) ;			// Z 버퍼 OFF
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE) ;
+	pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE) ;			// Z 버퍼 OFF
+	pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE) ;
 }
 
 HRESULT CSprite::InitVB()
 {
-	if( FAILED( g_TextureManager->pd3dDevice->CreateVertexBuffer( 4*sizeof(SPRITE_VERTEX), 0, D3DFVF_SPRITE_VERTEX, D3DPOOL_DEFAULT, &m_pVB, NULL ) ) )
+	const LPDIRECT3DDEVICE9 pd3dDevice = g_D3dDevice->GetDevice() ;
+
+	if( FAILED( pd3dDevice->CreateVertexBuffer( 4*sizeof(SPRITE_VERTEX), 0, D3DFVF_SPRITE_VERTEX, D3DPOOL_DEFAULT, &m_pVB, NULL ) ) )
 	{
 		return E_FAIL;
 	}
@@ -274,6 +278,8 @@ bool CSprite::SetTexture(char *texfile)
 
 void CSprite::SetupMatrices()
 {
+	const LPDIRECT3DDEVICE9 pd3dDevice = g_D3dDevice->GetDevice() ;
+
 	D3DXMATRIXA16 matWorld, matX, matY, matZ, matT, matT2, matS ;
 	D3DXMatrixIdentity( &matWorld ) ;
 	D3DXMatrixRotationZ(&matX, m_fAngle[0]) ;
@@ -284,5 +290,5 @@ void CSprite::SetupMatrices()
 	D3DXMatrixScaling( &matS, m_fScaleX, m_fScaleY, 0.0f ) ;
 
 	matWorld = matWorld * matT2 * matX * matY * matZ * matT ;
-	g_TextureManager->pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld ) ;
+	pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld ) ;
 }

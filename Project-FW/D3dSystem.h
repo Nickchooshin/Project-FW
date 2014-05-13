@@ -15,7 +15,7 @@ public :
 
 	//void Release() ;
 
-	HRESULT InitD3d(HINSTANCE hInst, HWND hWnd, int nWidth, int nHeight, char* ErrorStr) ;
+	HRESULT InitD3d(const HINSTANCE hInst, const HWND hWnd, const int nWidth, const int nHeight, char* ErrorStr) ;
 	LPDIRECT3DDEVICE9 GetDevice() ;
 
 	bool BeginScene() ;
