@@ -58,6 +58,16 @@ void CameraManager::SetPosition(float x, float y, float Number)
 	m_Camera[Number]->SetPosition(x, y) ;
 }
 
+void CameraManager::MovePosition(float x, float y)
+{
+	MovePosition(x, y, m_nCameraNumber) ;
+}
+
+void CameraManager::MovePosition(float x, float y, float Number)
+{
+	m_Camera[Number]->MovePosition(x, y) ;
+}
+
 void CameraManager::CameraRun()
 {
 	m_Camera[m_nCameraNumber]->Run() ;

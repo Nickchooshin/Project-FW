@@ -29,7 +29,9 @@ Process* SampleProcess::process()
 
 void SampleProcess::Init()
 {
-	g_CameraManager->AddCamera(new CCamera()) ;
+	g_CameraManager->AddCamera(new CCamera(), 0) ;
+	g_CameraManager->AddCamera(new CCamera(), 1) ;
+	g_CameraManager->MovePosition(50.0f, 50.0f, 1) ;
 
 	Sprite.Init(50.0f, 50.0f, "sample_texture.png") ;
 	Sprite.SetTextureUV(0.0f, 0.0f, 50.0f, 50.0f) ;
@@ -113,6 +115,15 @@ void SampleProcess::Update(float dt)
 	{
 		UISprite.SetPositionZ(0.0f) ;
 		UISprite2.SetPositionZ(1.0f) ;
+	}
+
+	if(g_Keyboard->IsButtonDown(DIK_F1))
+	{
+		g_CameraManager->SetCamera(0) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_F2))
+	{
+		g_CameraManager->SetCamera(1) ;
 	}
 
 	/*if(g_Mouse->IsMouse(g_Mouse->LBUTTON_DOWN))
