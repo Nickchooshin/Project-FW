@@ -31,6 +31,8 @@ public :
 	void SetTextureUV(float u1, float v1, float u2, float v2) ;	// 텍스쳐 UV 설정
 	void TexReverse() ;									// 텍스쳐 뒤집기
 
+	D3DXVECTOR3 GetPosition() ;
+
 	void Render() ;
 private :
 	HRESULT InitVB() ;

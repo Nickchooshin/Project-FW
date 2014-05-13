@@ -182,6 +182,11 @@ void CSprite::TexReverse()
 	m_pVB->Unlock() ;
 }
 
+D3DXVECTOR3 CSprite::GetPosition()
+{
+	return m_Position ;
+}
+
 void CSprite::Render()
 {
 	const LPDIRECT3DDEVICE9 pd3dDevice = g_D3dDevice->GetDevice() ;

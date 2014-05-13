@@ -6,7 +6,7 @@
 
 #include "Sprite.h"
 #include "UISprite.h"
-#include "Camera.h"
+#include "CameraManager.h"
 
 const int sprite_max=1000 ;
 
@@ -29,7 +29,7 @@ Process* SampleProcess::process()
 
 void SampleProcess::Init()
 {
-	Camera = new CCamera ;
+	g_CameraManager->AddCamera(new CCamera()) ;
 
 	Sprite.Init(50.0f, 50.0f, "sample_texture.png") ;
 	Sprite.SetTextureUV(0.0f, 0.0f, 50.0f, 50.0f) ;
@@ -42,7 +42,6 @@ void SampleProcess::Init()
 
 void SampleProcess::Destroy()
 {
-	delete Camera ;
 }
 
 void SampleProcess::Update(float dt)
@@ -154,7 +153,7 @@ void SampleProcess::Update(float dt)
 
 void SampleProcess::Render()
 {
-	Camera->Run() ;
+	g_CameraManager->CameraRun() ;
 	
 	Sprite.Render() ;
 	UISprite.Render() ;

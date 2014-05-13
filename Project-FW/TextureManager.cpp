@@ -10,6 +10,8 @@ TextureManager::~TextureManager()
 
 	for(iter=m_Texture.begin(); iter!=m_Texture.end(); iter++)
 		iter->second->Release() ;
+
+	m_Texture.clear() ;
 }
 
 LPDIRECT3DTEXTURE9 TextureManager::GetTexture(string texfile, D3DXIMAGE_INFO **pTexInfo)

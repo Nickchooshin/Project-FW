@@ -168,6 +168,11 @@ void CUISprite::TexReverse()
 	m_pVB->Unlock() ;
 }
 
+D3DXVECTOR3 CUISprite::GetPosition()
+{
+	return m_Position ;
+}
+
 void CUISprite::Render()
 {
 	const LPDIRECT3DDEVICE9 pd3dDevice = g_D3dDevice->GetDevice() ;

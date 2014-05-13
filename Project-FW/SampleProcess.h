@@ -2,16 +2,8 @@
 
 #include "Process.h"
 
-class Keyboard ;
-class Mouse ;
-class CCamera ;
-
 class SampleProcess : public Process
 {
-	Keyboard *Key ;
-	Mouse *mouse ;
-	CCamera *Camera ;
-
 public :
 	static Process* process() ;
 
