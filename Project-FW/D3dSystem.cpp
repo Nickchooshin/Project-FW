@@ -1,4 +1,5 @@
 #include "D3dSystem.h"
+#include "D3dDevice.h"
 #include "InputDevice.h"
 #include "Keyboard.h"
 #include "Mouse.h"
@@ -21,7 +22,7 @@ CD3dSystem::~CD3dSystem()
 		m_pD3d->Release();
 }
 
-HRESULT CD3dSystem::InitD3d(HINSTANCE hInst, HWND hWnd, int nWidth, int nHeight, char* ErrorStr)
+HRESULT CD3dSystem::InitD3d(const HINSTANCE hInst, const HWND hWnd, const int nWidth, const int nHeight, char* ErrorStr)
 {
 	if( NULL == ( m_pD3d = Direct3DCreate9( D3D_SDK_VERSION ) ) )
 	{
@@ -69,11 +70,9 @@ HRESULT CD3dSystem::InitD3d(HINSTANCE hInst, HWND hWnd, int nWidth, int nHeight,
 	//if( !g_Joystick->Init() )
 	//	return E_FAIL ;
 
-	g_TextureManager->pd3dDevice = m_pd3dDevice ;
-
-	CCamera::pd3dDevice = m_pd3dDevice ;
-	CCamera::WinWidth = (float)nWidth ;
-	CCamera::WinHeight = (float)nHeight ;
+	g_D3dDevice->g_pd3dDevice = m_pd3dDevice ;
+	g_D3dDevice->WinWidth = nWidth ;
+	g_D3dDevice->WinHeight = nHeight ;
 
 	SetRenderState() ;
 

@@ -1,6 +1,6 @@
 #include "UISprite.h"
+#include "D3dDevice.h"
 #include "TextureManager.h"
-#include <stdio.h>
 
 CUISprite::CUISprite() : m_pVB(NULL),
 						 m_pIB(NULL),
@@ -170,36 +170,40 @@ void CUISprite::TexReverse()
 
 void CUISprite::Render()
 {
+	const LPDIRECT3DDEVICE9 pd3dDevice = g_D3dDevice->GetDevice() ;
+
 	SetupMatrices() ;
 
-	g_TextureManager->pd3dDevice->SetTexture( 0, m_pTexture ) ;
+	pd3dDevice->SetTexture( 0, m_pTexture ) ;
 
-	g_TextureManager->pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE );
-	g_TextureManager->pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
-	g_TextureManager->pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG2, D3DTA_TFACTOR );
-	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_TEXTUREFACTOR, D3DCOLOR_ARGB( m_nAlpha, 0, 0, 0 ) );		// m_Alpha 값이 알파채널
+	pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE );
+	pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
+	pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG2, D3DTA_TFACTOR );
+	pd3dDevice->SetRenderState( D3DRS_TEXTUREFACTOR, D3DCOLOR_ARGB( m_nAlpha, 0, 0, 0 ) );		// m_Alpha 값이 알파채널
 
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE) ;			// Z 버퍼 ON
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE) ;
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL ) ;
+	pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE) ;			// Z 버퍼 ON
+	pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE) ;
+	pd3dDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL ) ;
 
-	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE ) ; // 알파 블렌딩 ON
-	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA ) ;
-	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA ) ;
+	pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE ) ; // 알파 블렌딩 ON
+	pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA ) ;
+	pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA ) ;
 
-	g_TextureManager->pd3dDevice->SetStreamSource( 0, m_pVB, 0, sizeof(UISPRITE_VERTEX) );
-	g_TextureManager->pd3dDevice->SetFVF( D3DFVF_UISPRITE_VERTEX );
-	g_TextureManager->pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2) ;
+	pd3dDevice->SetStreamSource( 0, m_pVB, 0, sizeof(UISPRITE_VERTEX) );
+	pd3dDevice->SetFVF( D3DFVF_UISPRITE_VERTEX );
+	pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2) ;
 
-	g_TextureManager->pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE ) ; // 알파 블렌딩 OFF
+	pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE ) ; // 알파 블렌딩 OFF
 
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE) ;			// Z 버퍼 OFF
-	g_TextureManager->pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE) ;
+	pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE) ;			// Z 버퍼 OFF
+	pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE) ;
 }
 
 HRESULT CUISprite::InitVB()
 {
-	if( FAILED( g_TextureManager->pd3dDevice->CreateVertexBuffer( 4*sizeof(UISPRITE_VERTEX), 0, D3DFVF_UISPRITE_VERTEX, D3DPOOL_DEFAULT, &m_pVB, NULL ) ) )
+	const LPDIRECT3DDEVICE9 pd3dDevice = g_D3dDevice->GetDevice() ;
+
+	if( FAILED( pd3dDevice->CreateVertexBuffer( 4*sizeof(UISPRITE_VERTEX), 0, D3DFVF_UISPRITE_VERTEX, D3DPOOL_DEFAULT, &m_pVB, NULL ) ) )
 	{
 		return E_FAIL;
 	}
@@ -256,9 +260,11 @@ bool CUISprite::SetTexture(char *texfile)
 
 void CUISprite::SetupMatrices()
 {
+	const LPDIRECT3DDEVICE9 pd3dDevice = g_D3dDevice->GetDevice() ;
+
 	D3DXMATRIXA16 matWorld, matT ;
 	D3DXMatrixIdentity( &matWorld ) ;
 
 	matWorld = matWorld * matT ;
-	g_TextureManager->pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld ) ;
+	pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld ) ;
 }

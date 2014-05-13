@@ -1,10 +1,9 @@
 #include "Camera.h"
+#include "D3dDevice.h"
 
-LPDIRECT3DDEVICE9 CCamera::pd3dDevice = NULL ;
-float CCamera::WinWidth = 0.0f ;
-float CCamera::WinHeight = 0.0f ;
-
-CCamera::CCamera() : m_Position(WinWidth/2, WinHeight/2, 0.0f)
+CCamera::CCamera() : m_Position((float)(g_D3dDevice->GetWinWidth()/2),
+								(float)(g_D3dDevice->GetWinHeight()/2),
+								0.0f)
 {
 }
 CCamera::~CCamera()
@@ -19,6 +18,10 @@ void CCamera::SetPosition(float x, float y)
 
 void CCamera::Run()
 {
+	const LPDIRECT3DDEVICE9 pd3dDevice = g_D3dDevice->GetDevice() ;
+	const float WinWidth = (float)g_D3dDevice->GetWinWidth() ;
+	const float WinHeight = (float)g_D3dDevice->GetWinHeight() ;
+
 	D3DXMATRIXA16 matWorld ;
 	D3DXMatrixIdentity( &matWorld );
 	pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld ) ;

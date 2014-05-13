@@ -76,6 +76,9 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Sprite</Filter>
     </ClInclude>
+    <ClInclude Include="D3dDevice.h">
+      <Filter>System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Input">

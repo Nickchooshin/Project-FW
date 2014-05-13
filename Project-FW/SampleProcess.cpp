@@ -12,7 +12,6 @@ const int sprite_max=1000 ;
 
 CSprite Sprite, Sprite2 ;
 CUISprite UISprite, UISprite2 ;
-CCamera Camera ;
 
 SampleProcess::SampleProcess()
 {
@@ -30,6 +29,8 @@ Process* SampleProcess::process()
 
 void SampleProcess::Init()
 {
+	Camera = new CCamera ;
+
 	Sprite.Init(50.0f, 50.0f, "sample_texture.png") ;
 	Sprite.SetTextureUV(0.0f, 0.0f, 50.0f, 50.0f) ;
 	UISprite.Init(60.0f, 80.0f, "sample_texture2.png") ;
@@ -41,6 +42,7 @@ void SampleProcess::Init()
 
 void SampleProcess::Destroy()
 {
+	delete Camera ;
 }
 
 void SampleProcess::Update(float dt)
@@ -152,7 +154,7 @@ void SampleProcess::Update(float dt)
 
 void SampleProcess::Render()
 {
-	Camera.Run() ;
+	Camera->Run() ;
 	
 	Sprite.Render() ;
 	UISprite.Render() ;

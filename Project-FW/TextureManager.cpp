@@ -1,4 +1,5 @@
 #include "TextureManager.h"
+#include "D3dDevice.h"
 
 TextureManager::TextureManager()
 {
@@ -6,7 +7,6 @@ TextureManager::TextureManager()
 TextureManager::~TextureManager()
 {
 	map<string, LPDIRECT3DTEXTURE9>::iterator iter ;
-	LPDIRECT3DTEXTURE9 pTexture ;
 
 	for(iter=m_Texture.begin(); iter!=m_Texture.end(); iter++)
 		iter->second->Release() ;
@@ -14,6 +14,7 @@ TextureManager::~TextureManager()
 
 LPDIRECT3DTEXTURE9 TextureManager::GetTexture(string texfile, D3DXIMAGE_INFO **pTexInfo)
 {
+	const LPDIRECT3DDEVICE9 pd3dDevice = g_D3dDevice->GetDevice() ;
 	map<string, LPDIRECT3DTEXTURE9>::iterator iter ;
 
 	iter = m_Texture.find(texfile) ;
