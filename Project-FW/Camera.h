@@ -11,6 +11,7 @@ public :
 	~CCamera() ;
 
 	void SetPosition(float x, float y) ;
+	void MovePosition(float x, float y) ;
 
 	void Run() ;
 } ;
