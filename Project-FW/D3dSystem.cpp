@@ -8,6 +8,7 @@
 #include "Sprite.h"
 #include "UISprite.h"
 #include "Camera.h"
+#include "MusicManager.h"
 
 CD3dSystem::CD3dSystem() : m_pD3d(NULL),
 						   m_pd3dDevice(NULL)
@@ -69,6 +70,8 @@ HRESULT CD3dSystem::InitD3d(const HINSTANCE hInst, const HWND hWnd, const int nW
 	g_Joystick->Init() ;
 	//if( !g_Joystick->Init() )
 	//	return E_FAIL ;
+
+	g_MusicManager->Initialize() ;
 
 	g_D3dDevice->g_pd3dDevice = m_pd3dDevice ;
 	g_D3dDevice->WinWidth = nWidth ;

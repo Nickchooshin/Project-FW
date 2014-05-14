@@ -7,11 +7,13 @@
 #include "Sprite.h"
 #include "UISprite.h"
 #include "CameraManager.h"
+#include "MusicManager.h"
 
 const int sprite_max=1000 ;
 
 CSprite Sprite, Sprite2 ;
 CUISprite UISprite, UISprite2 ;
+FMOD::Sound *sound[3] ;
 
 SampleProcess::SampleProcess()
 {
@@ -40,6 +42,10 @@ void SampleProcess::Init()
 
 	Sprite2.Init("sample_texture2.png") ;
 	UISprite2.Init("sample_texture2.png") ;
+
+	sound[0] = g_MusicManager->LoadMusic("click_1.mp3", false, false) ;
+	sound[1] = g_MusicManager->LoadMusic("click_2.mp3", false, false) ;
+	sound[2] = g_MusicManager->LoadMusic("eat.mp3", false, false) ;
 }
 
 void SampleProcess::Destroy()
@@ -51,6 +57,7 @@ void SampleProcess::Update(float dt)
 	g_Keyboard->Update() ;
 	g_Mouse->Update() ;
 	g_Joystick->Update() ;
+	g_MusicManager->Loop() ;
 
 	static float x=0.0f, y=0.0f ;
 
@@ -124,6 +131,19 @@ void SampleProcess::Update(float dt)
 	if(g_Keyboard->IsButtonDown(DIK_F2))
 	{
 		g_CameraManager->SetCamera(1) ;
+	}
+	
+	if(g_Mouse->IsMouse(g_Mouse->LBUTTON_DOWN))
+	{
+		g_MusicManager->PlayMusic(sound[0]) ;
+	}
+	if(g_Mouse->IsMouse(g_Mouse->RBUTTON_DOWN))
+	{
+		g_MusicManager->PlayMusic(sound[2]) ;
+	}
+	if(g_Keyboard->IsButtonDown(DIK_SPACE))
+	{
+		g_MusicManager->PlayMusic(sound[1]) ;
 	}
 
 	/*if(g_Mouse->IsMouse(g_Mouse->LBUTTON_DOWN))
