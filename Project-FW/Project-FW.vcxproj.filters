@@ -39,6 +39,9 @@
     <ClCompile Include="CameraManager.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
+    <ClCompile Include="MusicManager.cpp">
+      <Filter>Music</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SampleProcess.h" />
@@ -85,6 +88,9 @@
     <ClInclude Include="CameraManager.h">
       <Filter>Camera</Filter>
     </ClInclude>
+    <ClInclude Include="MusicManager.h">
+      <Filter>Music</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Input">
@@ -110,6 +116,9 @@
     </Filter>
     <Filter Include="Input\Mouse">
       <UniqueIdentifier>{da6eebf9-eaf7-4ba7-bc59-e83facc8b3b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Music">
+      <UniqueIdentifier>{20f3370a-ac2e-4037-9d8c-c2dd436c93e7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
