@@ -2,6 +2,11 @@
 #include "D3dSystem.h"
 #include "ProcessManager.h"
 
+#ifdef _DEBUG
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+#include <stdio.h>
+#endif
+
 CWinSystem::CWinSystem(HINSTANCE hInst) : m_hInst(hInst),
 										  t(0.0f),
 										  dwOldTime(0)

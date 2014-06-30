@@ -37,6 +37,7 @@ void SampleProcess::Init()
 
 	Sprite.Init(50.0f, 50.0f, "sample_texture.png") ;
 	Sprite.SetTextureUV(0.0f, 0.0f, 50.0f, 50.0f) ;
+	Sprite.SetPositionZ(0.0f) ;
 	UISprite.Init(60.0f, 80.0f, "sample_texture2.png") ;
 	UISprite.Init("sample_texture2.png") ;
 
@@ -187,7 +188,7 @@ void SampleProcess::Render()
 	g_CameraManager->CameraRun() ;
 	
 	Sprite.Render() ;
-	UISprite.Render() ;
-	Sprite2.Render() ;
-	UISprite2.Render() ;
+	//UISprite.Render() ;
+	//Sprite2.Render() ;
+	//UISprite2.Render() ;
 }

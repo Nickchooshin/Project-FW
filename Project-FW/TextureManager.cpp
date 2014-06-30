@@ -29,7 +29,7 @@ LPDIRECT3DTEXTURE9 TextureManager::GetTexture(string texfile, D3DXIMAGE_INFO **p
 					D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, NULL, &TexInfo, NULL, &pTexture ) ) )
 		{
 			char str[1024] ;
-			sprintf(str, "Could not find %s Texture File", texfile.c_str()) ;
+			sprintf_s(str, "Could not find %s Texture File", texfile.c_str()) ;
 			MessageBox(NULL, str, "Texture error", MB_OK) ;
 
 			return NULL ;
@@ -39,7 +39,8 @@ LPDIRECT3DTEXTURE9 TextureManager::GetTexture(string texfile, D3DXIMAGE_INFO **p
 		m_TexInfo[texfile] = TexInfo ;
 	}
 
-	*pTexInfo = &m_TexInfo[texfile] ;
+	if(pTexInfo!=NULL)
+		*pTexInfo = &m_TexInfo[texfile] ;
 
 	return m_Texture[texfile] ;
 }

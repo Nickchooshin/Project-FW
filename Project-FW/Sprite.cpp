@@ -294,6 +294,6 @@ void CSprite::SetupMatrices()
 	D3DXMatrixTranslation( &matT2, m_CenterPosition.x, m_CenterPosition.y, 0.0f) ;
 	D3DXMatrixScaling( &matS, m_fScaleX, m_fScaleY, 0.0f ) ;
 
-	matWorld = matWorld * matT2 * matX * matY * matZ * matT ;
+	matWorld = matWorld * matT2 * matX * matY * matZ * matS * matT ;
 	pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld ) ;
 }
