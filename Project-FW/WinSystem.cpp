@@ -1,6 +1,7 @@
 #include "WinSystem.h"
 #include "D3dSystem.h"
-#include "ProcessManager.h"
+#include "SceneManager.h"
+#include "D3dDevice.h"
 
 #ifdef _DEBUG
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
@@ -65,7 +66,9 @@ void CWinSystem::WinMsg(int Frame)
 
 	if( SUCCEEDED( D3dSystem.InitD3d( m_hInst, m_hWnd, m_WinWidth, m_WinHeight, ErrorStr ) ) )	// 다이렉트X 초기화 && 시스템 초기화
 	{
-		g_ProcessManager->InitProcess() ;
+		g_D3dDevice->Frame = Frame ;
+
+		g_SceneManager->InitScene() ;
 
 		ShowWindow( m_hWnd, SW_SHOWDEFAULT );
 		UpdateWindow( m_hWnd );
@@ -86,6 +89,10 @@ void CWinSystem::MsgLoop(int Frame)
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
 
+	float fFrameTime = (1.0f / Frame) ;
+	//dwOldTime = GetTickCount() ;
+	dwOldTime = timeGetTime() ;
+
 	while( msg.message!=WM_QUIT ) // WM_QUIT메시지 발생시 종료
 	{
 		if( PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE)) // 메시지가 있다 없다.
@@ -95,14 +102,23 @@ void CWinSystem::MsgLoop(int Frame)
 		}
 		else
 		{
-			t = (float)(GetTickCount() - dwOldTime) * 0.001f ;
+			//t = (float)(GetTickCount() - dwOldTime) * 0.001f ;
+			t = (float)(timeGetTime() - dwOldTime) * 0.001f ;
 
-			if(t>=(float)(1/Frame))
+			if(t>=fFrameTime)
 			{
+				int nElapsedFrame = (int)(t / fFrameTime) ;
+				g_D3dDevice->Time = (float)(fFrameTime * nElapsedFrame) ;
+
 				Update() ;
 				Render() ;
 
-				dwOldTime = GetTickCount() ;
+				DWORD dwElapsedTime = (DWORD)(t * 1000.0f) ;
+				DWORD dwFrameTime = (DWORD)(fFrameTime * nElapsedFrame * 1000.0f) ;
+				DWORD dwRemainTime = dwElapsedTime - dwFrameTime ;
+
+				//dwOldTime = GetTickCount() - dwRemainTime ;
+				dwOldTime = timeGetTime() - dwRemainTime ;
 			}
 		}
 	}
@@ -110,14 +126,14 @@ void CWinSystem::MsgLoop(int Frame)
 
 void CWinSystem::Update()
 {
-	g_ProcessManager->UpdateProcess(t) ;
+	g_SceneManager->UpdateScene(t) ;
 }
 
 void CWinSystem::Render()
 {
 	if( D3dSystem.BeginScene() )
 	{
-		g_ProcessManager->RenderProcess() ;
+		g_SceneManager->RenderScene() ;
 
 		D3dSystem.EndScene() ;
 	}
