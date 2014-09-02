@@ -188,6 +188,7 @@ void SampleProcess::Render()
 	g_CameraManager->CameraRun() ;
 	
 	Sprite.Render() ;
+	Sprite.SetCenterPosition(0.0f, 0.0f) ;
 	//UISprite.Render() ;
 	//Sprite2.Render() ;
 	//UISprite2.Render() ;

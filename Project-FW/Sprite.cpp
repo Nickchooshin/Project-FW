@@ -39,6 +39,8 @@ bool CSprite::Init(char *texfile)
 
 	if(FAILED(InitVB()))
 		return false ;
+
+	return true ;
 }
 
 bool CSprite::Init(float Width, float Height, char *texfile)
@@ -71,8 +73,8 @@ void CSprite::SetPositionZ(float Z)
 
 void CSprite::SetCenterPosition(float CenterX, float CenterY)
 {
-	m_CenterPosition.x = CenterX ;
-	m_CenterPosition.y = CenterY ;
+	m_CenterPosition.x = (-CenterX + 0.5f) * m_fWidth ;
+	m_CenterPosition.y = (-CenterY + 0.5f) * m_fHeight ;
 }
 
 void CSprite::SetAngle(float Angle, char Direction)
