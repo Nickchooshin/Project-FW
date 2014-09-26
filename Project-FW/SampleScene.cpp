@@ -11,15 +11,22 @@
 
 const int sprite_max=1000 ;
 
-CSprite Sprite, Sprite2 ;
-CUISprite UISprite, UISprite2 ;
 FMOD::Sound *sound[3] ;
 
-SampleScene::SampleScene()
+SampleScene::SampleScene() : m_pSprite1(NULL), m_pSprite2(NULL),
+							 m_pUISprite1(NULL), m_pUISprite2(NULL)
 {
 }
 SampleScene::~SampleScene()
 {
+	if(m_pSprite1!=NULL)
+		delete m_pSprite1 ;
+	if(m_pSprite2!=NULL)
+		delete m_pSprite2 ;
+	if(m_pUISprite1!=NULL)
+		delete m_pUISprite1 ;
+	if(m_pUISprite2!=NULL)
+		delete m_pUISprite2 ;
 }
 
 Scene* SampleScene::scene()
@@ -35,14 +42,20 @@ void SampleScene::Init()
 	g_CameraManager->AddCamera(new CCamera(), 1) ;
 	g_CameraManager->MovePosition(50.0f, 50.0f, 1) ;
 
-	Sprite.Init(50.0f, 50.0f, "sample_texture.png") ;
-	Sprite.SetTextureUV(0.0f, 0.0f, 50.0f, 50.0f) ;
-	Sprite.SetPositionZ(0.0f) ;
-	UISprite.Init(60.0f, 80.0f, "sample_texture2.png") ;
-	UISprite.Init("sample_texture2.png") ;
+	m_pSprite1 = new CSprite ;
+	m_pSprite1->Init(50.0f, 50.0f, "sample_texture.png") ;
+	m_pSprite1->SetTextureUV(0.0f, 0.0f, 50.0f, 50.0f) ;
+	m_pSprite1->SetPositionZ(0.0f) ;
 
-	Sprite2.Init("sample_texture2.png") ;
-	UISprite2.Init("sample_texture2.png") ;
+	m_pUISprite1 = new CUISprite ;
+	m_pUISprite1->Init(60.0f, 80.0f, "sample_texture2.png") ;
+	m_pUISprite1->Init("sample_texture2.png") ;
+
+	m_pSprite2 = new CSprite ;
+	m_pSprite2->Init("sample_texture2.png") ;
+
+	m_pUISprite2 = new CUISprite ;
+	m_pUISprite2->Init("sample_texture2.png") ;
 
 	sound[0] = g_MusicManager->LoadMusic("click_1.mp3", false, false) ;
 	sound[1] = g_MusicManager->LoadMusic("click_2.mp3", false, false) ;
@@ -81,48 +94,48 @@ void SampleScene::Update(float dt)
 
 	if(g_Keyboard->IsButtonDown(DIK_1))
 	{
-		Sprite.SetTextureUV(0.0f, 0.0f, 50.0f, 50.0f) ;
+		m_pSprite1->SetTextureUV(0.0f, 0.0f, 50.0f, 50.0f) ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_2))
 	{
-		Sprite.SetTextureUV(50.0f, 0.0f, 100.0f, 50.0f) ;
+		m_pSprite1->SetTextureUV(50.0f, 0.0f, 100.0f, 50.0f) ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_3))
 	{
-		Sprite.SetTextureUV(0.0f, 50.0f, 50.0f, 100.0f) ;
+		m_pSprite1->SetTextureUV(0.0f, 50.0f, 50.0f, 100.0f) ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_4))
 	{
-		Sprite.SetTextureUV(50.0f, 50.0f, 100.0f, 100.0f) ;
+		m_pSprite1->SetTextureUV(50.0f, 50.0f, 100.0f, 100.0f) ;
 	}
 
 	if(g_Keyboard->IsButtonDown(DIK_8))
 	{
-		Sprite.SetPositionZ(-1.0f) ;
+		m_pSprite1->SetPositionZ(-1.0f) ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_9))
 	{
-		Sprite.SetPositionZ(1.0f) ;
+		m_pSprite1->SetPositionZ(1.0f) ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_0))
 	{
-		Sprite.SetPositionZ(0.0f) ;
+		m_pSprite1->SetPositionZ(0.0f) ;
 	}
 
 	if(g_Keyboard->IsButtonDown(DIK_5))
 	{
-		UISprite.SetPositionZ(0.0f) ;
-		UISprite2.SetPositionZ(0.0f) ;
+		m_pUISprite1->SetPositionZ(0.0f) ;
+		m_pUISprite2->SetPositionZ(0.0f) ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_6))
 	{
-		UISprite.SetPositionZ(1.0f) ;
-		UISprite2.SetPositionZ(0.0f) ;
+		m_pUISprite1->SetPositionZ(1.0f) ;
+		m_pUISprite2->SetPositionZ(0.0f) ;
 	}
 	if(g_Keyboard->IsButtonDown(DIK_7))
 	{
-		UISprite.SetPositionZ(0.0f) ;
-		UISprite2.SetPositionZ(1.0f) ;
+		m_pUISprite1->SetPositionZ(0.0f) ;
+		m_pUISprite2->SetPositionZ(1.0f) ;
 	}
 
 	if(g_Keyboard->IsButtonDown(DIK_F1))
@@ -177,18 +190,18 @@ void SampleScene::Update(float dt)
 		MessageBox(NULL, "POV ก็", "POV ก็", MB_OK) ;
 	}*/
 
-	Sprite.SetPosition(x, y) ;
-	Sprite2.SetPosition(100.0f, 100.0f) ;
-	UISprite.SetPosition(100.0f, 100.0f) ;
-	UISprite2.SetPosition(50.0f, 50.0f) ;
+	m_pSprite1->SetPosition(x, y) ;
+	m_pSprite2->SetPosition(100.0f, 100.0f) ;
+	m_pUISprite1->SetPosition(100.0f, 100.0f) ;
+	m_pUISprite2->SetPosition(50.0f, 50.0f) ;
 }
 
 void SampleScene::Render()
 {
 	g_CameraManager->CameraRun() ;
 	
-	Sprite.Render() ;
-	//UISprite.Render() ;
-	//Sprite2.Render() ;
-	//UISprite2.Render() ;
+	m_pSprite1->Render() ;
+	m_pUISprite1->Render() ;
+	m_pSprite2->Render() ;
+	m_pUISprite2->Render() ;
 }
