@@ -2,8 +2,15 @@
 
 #include "Scene.h"
 
+class CSprite ;
+class CUISprite ;
+
 class SampleScene : public Scene
 {
+private :
+	CSprite *m_pSprite1, *m_pSprite2 ;
+	CUISprite *m_pUISprite1, *m_pUISprite2 ;
+
 public :
 	static Scene* scene() ;
 
